@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\agentController;
+use App\Http\Controllers\clientController;
 use Illuminate\Support\Facades\Route;
 
 /*
