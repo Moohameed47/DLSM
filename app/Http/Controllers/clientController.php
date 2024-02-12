@@ -9,7 +9,7 @@ class clientController extends Controller
 {
     public function index()
     {
-        $clients = clients::all();
-        dd($clients);
+        $Clients = clients::all();
+        return $Clients;
     }
 }

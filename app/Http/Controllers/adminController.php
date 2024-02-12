@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\admins;
 use Illuminate\Http\Request;
+use App\Models\admins;
+use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
 {
@@ -13,4 +13,5 @@ class adminController extends Controller
         $admins = admins::all();
         return $admins;
     }
+
 }
