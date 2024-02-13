@@ -13,9 +13,16 @@ return new class extends Migration
     {
         Schema::create('fac_ex_im_companies', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('TaxCard');
+            $table->string('Name');
+            $table->string('Email')->unique();
+            $table->string('Password');
+            $table->string('Address');
+            $table->string('TaxCard')->nullable();
+            $table->string('PhoneNumber');
             $table->string('CommercialRecord');
             $table->string('IndustrialRecord');
+            $table->string('CountryDealing');
+            $table->string('CountryTarget');
             $table->string('Website');
             $table->timestamps();
         });

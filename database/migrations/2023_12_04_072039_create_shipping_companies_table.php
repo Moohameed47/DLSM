@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('Password');
             $table->string('Address');
             $table->string('Website');
-            $table->string('BuisinessHistory');
-            $table->string('BuisinessHours');
+            $table->string('BusinessHistory');
+            $table->string('BusinessHours');
             $table->string('PhoneNumber')->unique();
             $table->timestamps();
         });

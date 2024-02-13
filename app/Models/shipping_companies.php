@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class shipping_companies extends Model
 {
-    use HasFactory;
-}
+    use HasApiTokens,HasFactory;
+    protected $fillable = [
+        'Name','Email','Password','Address','Website','BusinessHistory','BusinessHours','PhoneNumber'
+    ];}

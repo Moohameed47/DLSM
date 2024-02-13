@@ -2,35 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\admins;
+use App\Models\clients;
+use App\Models\fac_ex_im_companies;
+use App\Models\shipping_companies;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class loginController extends Controller
 {
-    public function login(Request $req) {
+    public function login(Request $req)
+    {
         $req->validate([
             "Email" => "required|email",
             "Password" => "required",
         ]);
-        $user = admins::where('Email', $req->Email)->first();
-        if(!empty($user))
-            if(Hash::check($req->Password, $user->Password)){
-                $token = $user->createToken("myToken")->plainTextToken;
+        $admin = admins::where('Email', $req->Email)->first();
+        $client = clients::where('Email', $req->Email)->first();
+        $fac_ex_im_companies = fac_ex_im_companies::where('Email', $req->Email)->first();
+        $shipping_companies = shipping_companies::where('Email', $req->Email)->first();
+        if (!empty($admin))
+            if (Hash::check($req->Password, $admin->Password)) {
+                $token = $admin->createToken("myToken")->plainTextToken;
                 return response()->json([
                     "status" => true,
                     "message" => "Login Successful",
                     "token" => $token,
                 ]);
-            }
-            else return response()->json([
+            } else return response()->json([
                 "status" => false,
                 "message" => "Password Didn't Match",
             ]);
-
-        else
-        return response()->json([
+        else if (!empty($client))
+            if (Hash::check($req->Password, $client->Password)) {
+                $token = $client->createToken("myToken")->plainTextToken;
+                return response()->json([
+                    "status" => true,
+                    "message" => "Login Successful",
+                    "token" => $token,
+                ]);
+            } else return response()->json([
+                "status" => false,
+                "message" => "Password Didn't Match",
+            ]);
+        else if (!empty($fac_ex_im_companies))
+            if (Hash::check($req->Password, $fac_ex_im_companies->Password)) {
+                $token = $fac_ex_im_companies->createToken("myToken")->plainTextToken;
+                return response()->json([
+                    "status" => true,
+                    "message" => "Login Successful",
+                    "token" => $token,
+                ]);
+            } else return response()->json([
+                "status" => false,
+                "message" => "Password Didn't Match",
+            ]);
+        else if (!empty($shipping_companies))
+            if (Hash::check($req->Password, $shipping_companies->Password)) {
+                $token = $shipping_companies->createToken("myToken")->plainTextToken;
+                return response()->json([
+                    "status" => true,
+                    "message" => "Login Successful",
+                    "token" => $token,
+                ]);
+            } else return response()->json([
+                "status" => false,
+                "message" => "Password Didn't Match",
+            ]);
+        else return response()->json([
             "status" => false,
             "message" => "Invalid Login Details",
         ]);
-    }}
+    }
+}
