@@ -42,6 +42,9 @@ Route::get('requests', [requestController::class, 'index']);
 Route::post('register',[registerController::class,'register']);
 Route::post('login',[loginController::class,'login']);
 
+//Requests
+Route::get('requests/{id}', [requestController::class, 'show']);
+
 //Agents
 Route::get('agents/{id}', [agentController::class, 'show']);
 Route::get('agents/destroy/{id}', [agentController::class, 'delete']);

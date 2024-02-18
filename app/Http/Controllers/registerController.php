@@ -25,7 +25,7 @@ class registerController extends Controller
                 "SSN" => "required|unique:admins|unique:clients",
                 "Photo" => "required",
                 "Nationality" => "required",
-                "PhoneNumber" => "required|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies"
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies"
             ]);
             clients::create([
                 "Name" => $req->Name,
@@ -46,10 +46,10 @@ class registerController extends Controller
                 "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Password" => "required|confirmed",
                 "Address" => "required",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Website" => "required",
                 "BusinessHistory" => "required",
                 "BusinessHours" => "required",
-                "PhoneNumber" => "required|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
             ]);
             shipping_companies::create([
                 "Name" => $req->Name,
@@ -70,7 +70,7 @@ class registerController extends Controller
                 "Name" => "required",
                 "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Password" => "required|confirmed",
-                "PhoneNumber" => "required|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Address" => "required",
                 "Website" => "required",
                 "TaxCard" => "required",
@@ -101,7 +101,7 @@ class registerController extends Controller
                 "Name" => "required",
                 "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Password" => "required|confirmed",
-                "PhoneNumber" => "required|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
                 "Website" => "required",
                 "CommercialRecord" => "required",
                 "IndustrialRecord" => "required",

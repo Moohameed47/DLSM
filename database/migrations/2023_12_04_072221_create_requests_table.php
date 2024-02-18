@@ -14,13 +14,25 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('Location');
-            $table->string('Distination');
+            $table->string('Destination');
+            $table->string('Comment');
+            $table->string('GoodsType');
             $table->string('Safety');
             $table->integer('Weight');
+            $table->integer('Length');
+            $table->integer('Width');
+            $table->integer('Height');
             $table->string('Range');
+            $table->string('Country');
             $table->string('ExtraFees');
             $table->string('PreferType');
-            $table->string('GoodsType');
+            $table->string('TypesOfTruck');
+            $table->string('WeightOfSingleCarton');
+            $table->string('ContainerTypeAndSize');
+            $table->string('NumberOfContainer');
+            $table->string('NumberOfCartons');
+            $table->string('Sender_id');
+            $table->string('Agent_id');
             $table->timestamps();
         });
     }
