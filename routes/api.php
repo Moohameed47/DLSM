@@ -44,6 +44,7 @@ Route::post('login',[loginController::class,'login']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);
+Route::post('requests-create', [requestController::class, 'store']);
 
 //Agents
 Route::get('agents/{id}', [agentController::class, 'show']);

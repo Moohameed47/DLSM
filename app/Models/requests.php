@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class requests extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'Country','Location','Destination','Comment','GoodsType','Weight','Height','Lenght','Width','Transport','TypesOfTruck','WeightOfSingleCarton','ContainerTypeAndSize','NumberOfContainer','Safety','Sender_id'
+    ];
 }

@@ -43,6 +43,7 @@ class requestController extends Controller
                 "Destination" => $req->Destination,
                 "Comment" => $req->Comment,
                 "GoodsType" => $req->GoodsType,
+                "req_type"=> $req->req_type,
             ]);
             return response()->json([
                 "status" => true,
@@ -72,6 +73,7 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "TypesOfTruck" => $req->TypesOfTruck,
                     "WeightOfSingleCarton" => $req->WeightOfSingleCartoon,
+                    "req_type"=> $req->req_type,
                 ]);
                 return response()->json([
                     "status" => true,
@@ -90,6 +92,7 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "ContainerTypeAndSize" => $req->ContainerTypeAndSize,
                     "NumberOfContainer" => $req->NumberOfContainer,
+                    "req_type"=> $req->req_type,
                 ]);
                 return response()->json([
                     "status" => true,
@@ -107,40 +110,42 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "NumberOfCartons" => $req->NumberOfCartons,
                     "WeightOfSingleCarton" => $req->WeightOfSingleCarton,
+                    "req_type"=> $req->req_type,
                 ]);
                 return response()->json([
                     "status" => true,
                     "message" => "International ( Air ) Request Sent Successfully",
                 ]);
             }
-        } else if ($req->req_type == 2) { // That's Mean Local
+        } else if ($req->req_type == 3) { // That's Mean Local
             $req->validate([
+                "Country" => "required",
                 "Location" => "required",
                 "Destination" => "required",
-                "Weight" => "required",
-                "Length" => "required",
-                "Width" => "required",
-                "Height" => "required",
-                "Comment" => "required",
                 "GoodsType" => "required",
-                "Transport" => "required",
+                "Weight" => "required",
+                "Comment" => "required",
             ]);
-            if ($req->Transport == 1){ // That's mean Wild
-                if($req->dangerous){
-                    requests::create([
+            if($req->dangerous == "1"){
+                $req->validate([
+                    "Safety" => "required",
+                ]);
+                requests::create([
                         "Country" => $req->Country,
                         "Location" => $req->Location,
                         "Destination" => $req->Destination,
-                        "Comment" => $req->Comment,
                         "GoodsType" => $req->GoodsType,
                         "Weight" => $req->Weight,
                         "Safety" => $req->Safety,
+                        "Comment" => $req->Comment,
+                        "Sender_id" => $req->Sender_id,
+                        "req_type"=> $req->req_type,
                     ]);
                     return response()->json([
                         "status" => true,
                         "message" => "Local Request Sent Successfully",
                     ]);
-                } else {
+            } else {
                     requests::create([
                         "Country" => $req->Country,
                         "Location" => $req->Location,
@@ -148,13 +153,17 @@ class requestController extends Controller
                         "Comment" => $req->Comment,
                         "GoodsType" => $req->GoodsType,
                         "Weight" => $req->Weight,
+                        "req_type"=> $req->req_type,
                     ]);
                     return response()->json([
                         "status" => true,
                         "message" => "Local Request Sent Successfully",
                     ]);
-                }
             }
         }   
+        return response()->json([
+            "status" => false,
+            "message" => "Request Failed",
+        ]);
     }
 }
