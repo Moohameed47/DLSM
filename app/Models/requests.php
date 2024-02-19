@@ -9,6 +9,6 @@ class requests extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Country','Location','Destination','Comment','GoodsType','Weight','Height','Lenght','Width','Transport','TypesOfTruck','WeightOfSingleCarton','ContainerTypeAndSize','NumberOfContainer','Safety','Sender_id'
+        'Country','Location','Destination','Comment','GoodsType','Weight','Height','Lenght','Width','Transport','TypesOfTruck','WeightOfSingleCarton','ContainerTypeAndSize','NumberOfContainer','Safety','TypeOfRequest','TypeOfInternational'
     ];
 }

@@ -9,9 +9,25 @@ use Illuminate\Support\Facades\Hash;
 class requestController extends Controller
 {
 
-    public function index()
+    public function index_Dhl()
     {
-        return requests::all();
+        return requests::all()->where('TypeOfRequest',1);
+    }
+    public function index_Wild()
+    {
+        return requests::all()->where('TypeOfInternational',1);
+    }
+    public function index_Sea()
+    {
+        return requests::all()->where('TypeOfInternational',2);
+    }
+    public function index_Air()
+    {
+        return requests::all()->where('TypeOfInternational',3);
+    }
+    public function index_Local()
+    {
+        return requests::all()->where('TypeOfRequest',3);
     }
 
     public function show($id)
@@ -43,7 +59,7 @@ class requestController extends Controller
                 "Destination" => $req->Destination,
                 "Comment" => $req->Comment,
                 "GoodsType" => $req->GoodsType,
-                "req_type"=> $req->req_type,
+                "TypeOfRequest" => 1
             ]);
             return response()->json([
                 "status" => true,
@@ -73,7 +89,8 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "TypesOfTruck" => $req->TypesOfTruck,
                     "WeightOfSingleCarton" => $req->WeightOfSingleCartoon,
-                    "req_type"=> $req->req_type,
+                    "TypeOfRequest" => 2,
+                    "TypeOfInternational" => 1 
                 ]);
                 return response()->json([
                     "status" => true,
@@ -92,7 +109,8 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "ContainerTypeAndSize" => $req->ContainerTypeAndSize,
                     "NumberOfContainer" => $req->NumberOfContainer,
-                    "req_type"=> $req->req_type,
+                    "TypeOfRequest" => 2,
+                    "TypeOfInternational" => 2
                 ]);
                 return response()->json([
                     "status" => true,
@@ -110,7 +128,8 @@ class requestController extends Controller
                     "Height" => $req->Height,
                     "NumberOfCartons" => $req->NumberOfCartons,
                     "WeightOfSingleCarton" => $req->WeightOfSingleCarton,
-                    "req_type"=> $req->req_type,
+                    "TypeOfRequest" => 2,
+                    "TypeOfInternational" => 3
                 ]);
                 return response()->json([
                     "status" => true,
@@ -138,8 +157,7 @@ class requestController extends Controller
                         "Weight" => $req->Weight,
                         "Safety" => $req->Safety,
                         "Comment" => $req->Comment,
-                        "Sender_id" => $req->Sender_id,
-                        "req_type"=> $req->req_type,
+                        "TypeOfRequest" => 3,
                     ]);
                     return response()->json([
                         "status" => true,
@@ -153,7 +171,7 @@ class requestController extends Controller
                         "Comment" => $req->Comment,
                         "GoodsType" => $req->GoodsType,
                         "Weight" => $req->Weight,
-                        "req_type"=> $req->req_type,
+                        "TypeOfRequest" => 3,
                     ]);
                     return response()->json([
                         "status" => true,

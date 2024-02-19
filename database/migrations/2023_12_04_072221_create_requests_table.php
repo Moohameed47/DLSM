@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('ContainerTypeAndSize')->nullable();
             $table->string('NumberOfContainer')->nullable();
             $table->string('NumberOfCartons')->nullable();
+            $table->string('TypeOfRequest'); // 1 DHL  // 2 International // 3 Local 
+            $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air 
             $table->timestamps();
         });
     }

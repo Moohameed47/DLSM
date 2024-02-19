@@ -34,9 +34,10 @@ Route::get('admins', [adminController::class, 'index']);
 Route::get('clients', [clientController::class, 'index']);
 Route::get('agents', [agentController::class, 'index']);
 Route::get('shipping_companies', [shipping_companyController::class, 'index']);
-Route::get('fac_ex_im_companies',[fac_ex_im_companyController::class,'index']);
+Route::get('ex_im_companies',[fac_ex_im_companyController::class,'index_ex_im']);
+Route::get('fac_companies',[fac_ex_im_companyController::class,'index_fac']);
 Route::get('offers', [offerController::class, 'index']);
-Route::get('requests', [requestController::class, 'index']);
+Route::get('request-Wild', [requestController::class, 'index_Wild']);
 
 //Login & Register
 Route::post('register',[registerController::class,'register']);

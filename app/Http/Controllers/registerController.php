@@ -91,6 +91,8 @@ class registerController extends Controller
                 "IndustrialRecord" => $req->IndustrialRecord,
                 "CountryDealing" => $req->CountryDealing,
                 "CountryTarget" => $req->CountryTarget,
+                "TypeOfCompany" => 1, //Thats Mean Ex-Im Company
+
             ]);
             return response()->json([
                 "status" => true,
@@ -120,6 +122,7 @@ class registerController extends Controller
                 "IndustrialRecord" => $req->IndustrialRecord,
                 "CountryDealing" => $req->CountryDealing,
                 "CountryTarget" => $req->CountryTarget,
+                "TypeOfCompany" => 2, //Thats Mean Factory Company
             ]);
             return response()->json([
                 "status" => true,

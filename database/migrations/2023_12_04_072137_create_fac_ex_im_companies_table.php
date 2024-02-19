@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('Password');
             $table->string('Address');
             $table->string('TaxCard')->nullable();
-            $table->string('PhoneNumber');
+            $table->string('PhoneNumber')->unique();
             $table->string('CommercialRecord');
             $table->string('IndustrialRecord');
             $table->string('CountryDealing');
             $table->string('CountryTarget');
             $table->string('Website');
+            $table->string('TypeOfCompany');
             $table->timestamps();
         });
     }
