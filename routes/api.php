@@ -38,6 +38,10 @@ Route::get('ex_im_companies',[fac_ex_im_companyController::class,'index_ex_im'])
 Route::get('fac_companies',[fac_ex_im_companyController::class,'index_fac']);
 Route::get('offers', [offerController::class, 'index']);
 Route::get('request-Wild', [requestController::class, 'index_Wild']);
+Route::get('request-Sea', [requestController::class, 'index_Sea']);
+Route::get('request-Air', [requestController::class, 'index_Air']);
+Route::get('request-Local', [requestController::class, 'index_Local']);
+Route::get('request-Dhl', [requestController::class, 'index_Dhl']);
 
 //Login & Register
 Route::post('register',[registerController::class,'register']);
