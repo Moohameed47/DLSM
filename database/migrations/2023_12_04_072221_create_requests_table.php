@@ -34,6 +34,8 @@ return new class extends Migration {
             $table->string('NumberOfCartons')->nullable();
             $table->string('TypeOfRequest'); // 1 DHL  // 2 International // 3 Local
             $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air
+            $table->integer('ACCEPT')->nullable();
+            $table->integer('DONE')->nullable();
             $table->timestamps();
         });
     }

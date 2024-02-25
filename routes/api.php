@@ -48,8 +48,17 @@ Route::post('login', [loginController::class, 'login']);
 Route::get('requests/{id}', [requestController::class, 'show']);
 Route::post('requests-create', [requestController::class, 'store']);
 
+//Offers
+Route::get('offers/{id}', [offerController::class, 'show']);
+Route::post('offers-create', [offerController::class, 'store']);
+
+
 //Agents
 Route::get('agents/{id}', [agentController::class, 'show']);
 Route::get('agents/destroy/{id}', [agentController::class, 'delete']);
 Route::post('agents-create', [agentController::class, 'store']);
 
+// Retrieve all First for a specific Second
+Route::get('offers/agent/{id}',[offerController::class, 'offerForSpecificAgent']);
+Route::get('shipping/agent/{id}',[shipping_companyController::class, 'shippingForSpecificAgent']);
+Route::get('offers/request/{id}',[offerController::class, 'offersForSpecificRequest']);

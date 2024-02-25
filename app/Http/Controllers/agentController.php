@@ -28,9 +28,9 @@ class agentController extends Controller
     {
         request()->validate([
             "Name" => "required",
-            "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+            "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
             "Password" => "required|confirmed",
-            "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+            "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
             "shipping_id" => "required"
         ]);
         $newAgent = request()->all();

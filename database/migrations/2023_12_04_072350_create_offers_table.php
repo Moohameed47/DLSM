@@ -12,6 +12,10 @@ return new class extends Migration {
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->unsignedBigInteger('agents_id');
+            $table->foreign('agents_id')->references('id')->on('agents')->onDelete('cascade');
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
             $table->integer('Price');
             $table->string('PL');
             $table->string('TT');

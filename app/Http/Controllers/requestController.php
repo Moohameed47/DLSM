@@ -192,4 +192,9 @@ class requestController extends Controller
             "message" => "Request Failed",
         ]);
     }
+
+    public function offers()
+    {
+        return $this->hasMany(offers::class);
+    }
 }

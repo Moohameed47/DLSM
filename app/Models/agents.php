@@ -17,4 +17,8 @@ class agents extends Model
     {
         return $this->belongsTo(shipping_companies::class);
     }
+    public function offers()
+    {
+        return $this->hasMany(offers::class);
+    }
 }

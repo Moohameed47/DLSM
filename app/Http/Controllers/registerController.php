@@ -18,12 +18,12 @@ class registerController extends Controller
         if ($req->table_choice == 1) {
             $req->validate([
                 "Name" => "required",
-                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
                 "SSN" => "required|unique:admins|unique:clients",
                 "Photo" => "required",
                 "Nationality" => "required",
-                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies"
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies"
             ]);
             clients::create([
                 "Name" => $req->Name,
@@ -42,10 +42,10 @@ class registerController extends Controller
         } else if ($req->table_choice == 2) {
             $req->validate([
                 "Name" => "required",
-                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
                 "Address" => "required",
-                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
                 "Website" => "required",
                 "BusinessHistory" => "required",
                 "BusinessHours" => "required",
@@ -67,9 +67,9 @@ class registerController extends Controller
         } else if ($req->table_choice == 3) {
             $req->validate([
                 "Name" => "required",
-                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
-                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
                 "Address" => "required",
                 "Website" => "required",
                 "TaxCard" => "required",
@@ -99,9 +99,9 @@ class registerController extends Controller
         } else if ($req->table_choice == 4) {
             $req->validate([
                 "Name" => "required",
-                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
-                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
                 "Website" => "required",
                 "CommercialRecord" => "required",
                 "IndustrialRecord" => "required",
@@ -129,7 +129,7 @@ class registerController extends Controller
         } else if ($req->table_choice == 5) {
             $req->validate([
                 "Name" => "required",
-                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies|unique:fac_ex_im_companies",
+                "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
                 "SSN" => "required|unique:admins|unique:clients",
             ]);

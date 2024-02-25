@@ -10,7 +10,10 @@ class requests extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'fac_ex_im_id', 'Country', 'Location', 'Destination', 'Comment', 'GoodsType', 'Weight', 'Height', 'Lenght', 'Width', 'Transport', 'TypesOfTruck', 'WeightOfSingleCarton', 'ContainerTypeAndSize', 'NumberOfContainer', 'Safety', 'TypeOfRequest', 'TypeOfInternational'
+        'client_id', 'fac_ex_im_id', 'Country', 'Location', 'Destination', 
+        'Comment', 'GoodsType', 'Weight', 'Height', 'Lenght', 'Width', 'Transport',
+         'TypesOfTruck', 'WeightOfSingleCarton', 'ContainerTypeAndSize', 'NumberOfContainer',
+          'Safety', 'TypeOfRequest', 'TypeOfInternational','client_id','ACCEPT','DONE',
     ];
 
 //    public function factory()
