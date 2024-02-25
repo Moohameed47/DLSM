@@ -8,7 +8,13 @@ use Laravel\Sanctum\HasApiTokens;
 
 class shipping_companies extends Model
 {
-    use HasApiTokens,HasFactory;
+    use HasApiTokens, HasFactory;
+
     protected $fillable = [
-        'Name','Email','Password','Address','Website','BusinessHistory','BusinessHours','PhoneNumber'
-    ];}
+        'Name', 'Email', 'Password', 'Address', 'Website', 'BusinessHistory', 'BusinessHours', 'PhoneNumber'
+    ];
+    public function agents()
+    {
+        return $this->hasMany(agents::class);
+    }
+}

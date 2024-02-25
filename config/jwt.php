@@ -170,7 +170,7 @@ return [
     | This will determine whether a `prv` claim is automatically added to
     | the token. The purpose of this is to ensure that if you have multiple
     | authentication models e.g. `App\User` & `App\OtherPerson`, then we
-    | should prevent one authentication request from impersonating another,
+    | should prevent one authentication requests from impersonating another,
     | if 2 tokens happen to have the same id across the 2 different models.
     |
     | Under specific circumstances, you may want to disable this behaviour
@@ -217,9 +217,9 @@ return [
     |
     | When multiple concurrent requests are made with the same JWT,
     | it is possible that some of them fail, due to token regeneration
-    | on every request.
+    | on every requests.
     |
-    | Set grace period in seconds to prevent parallel request failure.
+    | Set grace period in seconds to prevent parallel requests failure.
     |
     */
 

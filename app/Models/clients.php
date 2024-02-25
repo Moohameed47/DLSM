@@ -8,8 +8,18 @@ use Laravel\Sanctum\HasApiTokens;
 
 class clients extends Model
 {
-    use HasApiTokens,HasFactory;
+    use HasApiTokens, HasFactory;
+
     protected $fillable = [
-        'Name','Email','Password','SSN','Photo','Nationality','PhoneNumber'
+        'Name', 'Email', 'Password', 'SSN', 'Photo',
+        'Nationality',
+        'TaxCard', 'PhoneNumber', 'Address',
+        'Website', 'CommercialRecord', 'IndustrialRecord',
+        'CountryDealing', 'CountryTarget', 'TypeOfClient'
     ];
+
+    public function request()
+    {
+        return $this->hasMany(requests::class);
+    }
 }

@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class agents extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'Name','Email','Password','PhoneNumber'
+        'shipping_id', 'Name', 'Email', 'Password', 'PhoneNumber'
     ];
+
+    public function shipping_companies()
+    {
+        return $this->belongsTo(shipping_companies::class);
+    }
 }

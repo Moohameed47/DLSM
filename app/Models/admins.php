@@ -8,10 +8,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class admins extends Model
 {
-    use HasApiTokens,HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $fillable = [
-        'Name','Email','Password','SSN',
+        'Name', 'Email', 'Password', 'SSN',
     ];
 
 }

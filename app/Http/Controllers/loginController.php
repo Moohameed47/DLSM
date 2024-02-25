@@ -19,7 +19,6 @@ class loginController extends Controller
         ]);
         $admin = admins::where('Email', $req->Email)->first();
         $client = clients::where('Email', $req->Email)->first();
-        $fac_ex_im_companies = fac_ex_im_companies::where('Email', $req->Email)->first();
         $shipping_companies = shipping_companies::where('Email', $req->Email)->first();
         if (!empty($admin))
             if (Hash::check($req->Password, $admin->Password)) {
@@ -45,33 +44,22 @@ class loginController extends Controller
                 "status" => false,
                 "message" => "Password Didn't Match",
             ]);
-        else if (!empty($fac_ex_im_companies))
-            if (Hash::check($req->Password, $fac_ex_im_companies->Password)) {
-                $token = $fac_ex_im_companies->createToken("myToken")->plainTextToken;
-                return response()->json([
-                    "status" => true,
-                    "message" => "Login Successful",
-                    "token" => $token,
+        else
+            if (!empty($shipping_companies))
+                if (Hash::check($req->Password, $shipping_companies->Password)) {
+                    $token = $shipping_companies->createToken("myToken")->plainTextToken;
+                    return response()->json([
+                        "status" => true,
+                        "message" => "Login Successful",
+                        "token" => $token,
+                    ]);
+                } else return response()->json([
+                    "status" => false,
+                    "message" => "Password Didn't Match",
                 ]);
-            } else return response()->json([
+            else return response()->json([
                 "status" => false,
-                "message" => "Password Didn't Match",
+                "message" => "Invalid Login Details",
             ]);
-        else if (!empty($shipping_companies))
-            if (Hash::check($req->Password, $shipping_companies->Password)) {
-                $token = $shipping_companies->createToken("myToken")->plainTextToken;
-                return response()->json([
-                    "status" => true,
-                    "message" => "Login Successful",
-                    "token" => $token,
-                ]);
-            } else return response()->json([
-                "status" => false,
-                "message" => "Password Didn't Match",
-            ]);
-        else return response()->json([
-            "status" => false,
-            "message" => "Invalid Login Details",
-        ]);
     }
 }

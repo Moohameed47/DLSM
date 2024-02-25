@@ -3,14 +3,11 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\agentController;
 use App\Http\Controllers\clientController;
-use App\Http\Controllers\shipping_companyController;
-use App\Http\Controllers\logoutController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\registerController;
-use App\Http\Controllers\fac_ex_im_companyController;
-use App\Http\Controllers\profileController;
 use App\Http\Controllers\offerController;
+use App\Http\Controllers\registerController;
 use App\Http\Controllers\requestController;
+use App\Http\Controllers\shipping_companyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,21 +28,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Get All Data From DB
 Route::get('admins', [adminController::class, 'index']);
-Route::get('clients', [clientController::class, 'index']);
+Route::get('clients', [clientController::class, 'index_client']);
 Route::get('agents', [agentController::class, 'index']);
 Route::get('shipping_companies', [shipping_companyController::class, 'index']);
-Route::get('ex_im_companies',[fac_ex_im_companyController::class,'index_ex_im']);
-Route::get('fac_companies',[fac_ex_im_companyController::class,'index_fac']);
+Route::get('ex_im_companies', [clientController::class, 'index_ex_im']);
+Route::get('fac_companies', [clientController::class, 'index_fac']);
 Route::get('offers', [offerController::class, 'index']);
-Route::get('request-Wild', [requestController::class, 'index_Wild']);
-Route::get('request-Sea', [requestController::class, 'index_Sea']);
-Route::get('request-Air', [requestController::class, 'index_Air']);
-Route::get('request-Local', [requestController::class, 'index_Local']);
-Route::get('request-Dhl', [requestController::class, 'index_Dhl']);
+Route::get('requests-Wild', [requestController::class, 'index_Wild']);
+Route::get('requests-Sea', [requestController::class, 'index_Sea']);
+Route::get('requests-Air', [requestController::class, 'index_Air']);
+Route::get('requests-Local', [requestController::class, 'index_Local']);
+Route::get('requests-Dhl', [requestController::class, 'index_Dhl']);
 
 //Login & Register
-Route::post('register',[registerController::class,'register']);
-Route::post('login',[loginController::class,'login']);
+Route::post('register', [registerController::class, 'register']);
+Route::post('login', [loginController::class, 'login']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);

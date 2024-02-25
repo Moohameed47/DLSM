@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\clients;
-use Illuminate\Http\Request;
 
 class clientController extends Controller
 {
-    public function index()
+    public function index_client()
     {
-        $Clients = clients::all();
-        return $Clients;
+        return clients::all()->where('TypeOfClient', 1);
     }
+
+    public function index_ex_im()
+    {
+        return clients::all()->where('TypeOfClient', 2);
+    }
+    public function index_fac()
+    {
+        return clients::all()->where('TypeOfClient', 3);
+    }
+
 }

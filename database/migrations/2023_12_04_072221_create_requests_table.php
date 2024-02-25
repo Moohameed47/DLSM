@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,8 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
+//            $table->foreignId('fac_ex_im_id')->references('id')->on('fac_ex_im_companies')->onDelete('cascade');
             $table->string('Location');
             $table->string('Destination');
             $table->string('Comment');
@@ -31,8 +32,8 @@ return new class extends Migration
             $table->string('ContainerTypeAndSize')->nullable();
             $table->string('NumberOfContainer')->nullable();
             $table->string('NumberOfCartons')->nullable();
-            $table->string('TypeOfRequest'); // 1 DHL  // 2 International // 3 Local 
-            $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air 
+            $table->string('TypeOfRequest'); // 1 DHL  // 2 International // 3 Local
+            $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air
             $table->timestamps();
         });
     }

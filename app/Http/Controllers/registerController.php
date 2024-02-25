@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\clients;
-use App\Models\agents;
-use App\Models\fac_ex_im_companies;
 use App\Models\admins;
+use App\Models\clients;
 use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +13,7 @@ class registerController extends Controller
     public function register(Request $req)
     {
         $req->validate([
-            "table_choice" => "required"
+            "table_choice" => "required",
         ]);
         if ($req->table_choice == 1) {
             $req->validate([
@@ -35,6 +33,7 @@ class registerController extends Controller
                 "Photo" => $req->Photo,
                 "Nationality" => $req->Nationality,
                 "PhoneNumber" => $req->PhoneNumber,
+                "TypeOfClient" => 1, //User
             ]);
             return response()->json([
                 "status" => true,
@@ -79,7 +78,7 @@ class registerController extends Controller
                 "CountryDealing" => "required",
                 "CountryTarget" => "required",
             ]);
-            fac_ex_im_companies::create([
+            clients::create([
                 "Name" => $req->Name,
                 "Email" => $req->Email,
                 "Password" => Hash::make($req->Password),
@@ -91,8 +90,7 @@ class registerController extends Controller
                 "IndustrialRecord" => $req->IndustrialRecord,
                 "CountryDealing" => $req->CountryDealing,
                 "CountryTarget" => $req->CountryTarget,
-                "TypeOfCompany" => 1, //Thats Mean Ex-Im Company
-
+                "TypeOfClient" => 2,   //Thats Mean Ex-Im Company
             ]);
             return response()->json([
                 "status" => true,
@@ -111,7 +109,7 @@ class registerController extends Controller
                 "CountryDealing" => "required",
                 "CountryTarget" => "required",
             ]);
-            fac_ex_im_companies::create([
+            clients::create([
                 "Name" => $req->Name,
                 "Email" => $req->Email,
                 "Password" => Hash::make($req->Password),
@@ -122,7 +120,7 @@ class registerController extends Controller
                 "IndustrialRecord" => $req->IndustrialRecord,
                 "CountryDealing" => $req->CountryDealing,
                 "CountryTarget" => $req->CountryTarget,
-                "TypeOfCompany" => 2, //Thats Mean Factory Company
+                "TypeOfCompany" => 3, //Thats Mean Factory Company
             ]);
             return response()->json([
                 "status" => true,
@@ -145,7 +143,7 @@ class registerController extends Controller
                 "status" => true,
                 "message" => "Admin Registered Successfully"
             ]);
-        }else{
+        } else {
             return response()->json([
                 "status" => false,
                 "message" => "Invalid Table_Choice"
