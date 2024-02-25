@@ -14,11 +14,11 @@ return new class extends Migration {
             $table->id()->autoIncrement();
             $table->string('Name');
             $table->string('Password');
-            $table->string('SSN');
+            $table->string('SSN')->nullable();
             $table->string('Email')->unique();
             $table->string('PhoneNumber');
-            $table->string('Nationality');
-            $table->string('Photo');
+            $table->string('Nationality')->nullable();
+            $table->string('Photo')->nullable();
             $table->string('Address')->nullable();
             $table->string('TaxCard')->nullable();
             $table->string('CommercialRecord')->nullable();
