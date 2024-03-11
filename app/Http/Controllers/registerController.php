@@ -21,7 +21,6 @@ class registerController extends Controller
                 "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
                 "Password" => "required|confirmed",
                 "SSN" => "required|unique:admins|unique:clients",
-                "Photo" => "required",
                 "Nationality" => "required",
                 "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies"
             ]);
@@ -72,9 +71,6 @@ class registerController extends Controller
                 "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
                 "Address" => "required",
                 "Website" => "required",
-                "TaxCard" => "required",
-                "CommercialRecord" => "required",
-                "IndustrialRecord" => "required",
                 "CountryDealing" => "required",
                 "CountryTarget" => "required",
             ]);
@@ -103,8 +99,6 @@ class registerController extends Controller
                 "Password" => "required|confirmed",
                 "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
                 "Website" => "required",
-                "CommercialRecord" => "required",
-                "IndustrialRecord" => "required",
                 "Address" => "required",
                 "CountryDealing" => "required",
                 "CountryTarget" => "required",
@@ -120,7 +114,7 @@ class registerController extends Controller
                 "IndustrialRecord" => $req->IndustrialRecord,
                 "CountryDealing" => $req->CountryDealing,
                 "CountryTarget" => $req->CountryTarget,
-                "TypeOfCompany" => 3, //Thats Mean Factory Company
+                "TypeOfClient" => 3, //Thats Mean Factory Company
             ]);
             return response()->json([
                 "status" => true,
@@ -141,7 +135,7 @@ class registerController extends Controller
             ]);
             return response()->json([
                 "status" => true,
-                "message" => "Admin Registered Successfully"
+                "message" => "Admin Registered Successfully",
             ]);
         } else {
             return response()->json([

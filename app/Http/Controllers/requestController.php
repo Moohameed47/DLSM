@@ -2,35 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\offers;
 use App\Models\requests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 class requestController extends Controller
 {
 
-    public function index_Dhl()
+    public function index()
     {
-        return requests::all()->where('TypeOfRequest', 1);
-    }
-
-    public function index_Wild()
-    {
-        return requests::all()->where('TypeOfInternational', 1);
-    }
-
-    public function index_Sea()
-    {
-        return requests::all()->where('TypeOfInternational', 2);
-    }
-
-    public function index_Air()
-    {
-        return requests::all()->where('TypeOfInternational', 3);
-    }
-
-    public function index_Local()
-    {
-        return requests::all()->where('TypeOfRequest', 3);
+        return requests::all();
     }
 
     public function show($id)

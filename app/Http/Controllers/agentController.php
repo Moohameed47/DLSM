@@ -11,7 +11,10 @@ class agentController extends Controller
         $agent = agents::all();
         return $agent;
     }
-
+    public function ShippingAgent($id){
+        $agents = agents::where('shipping_id', $id)->get();
+        return $agents;
+    }
     public function show($id)
     {
         $agent = agents::all()->where('id', $id)->first();
@@ -22,7 +25,7 @@ class agentController extends Controller
     {
         $agent = agents::where('id', $id)->delete();
         return `$id is Deleted`;
-    }
+    }  
 
     public function store()
     {

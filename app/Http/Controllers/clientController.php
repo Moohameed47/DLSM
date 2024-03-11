@@ -6,6 +6,9 @@ use App\Models\clients;
 
 class clientController extends Controller
 {
+    public function index(){
+        return clients::all();
+    }
     public function index_client()
     {
         return clients::all()->where('TypeOfClient', 1);
