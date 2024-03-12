@@ -7,7 +7,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\offerController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\registerController;
-use App\Http\Controllers\requestController;ss
+use App\Http\Controllers\requestController;
 use App\Http\Controllers\shipping_companyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
