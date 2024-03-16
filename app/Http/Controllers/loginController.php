@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\admins;
 use App\Models\agents;
 use App\Models\clients;
-use App\Models\fac_ex_im_companies;
 use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

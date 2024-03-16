@@ -9,7 +9,6 @@ class countryController extends Controller
 {
     //
     public function index() {
-        dd(Country::all());
         return Country::all();
     }
 }

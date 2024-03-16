@@ -36,6 +36,9 @@ return new class extends Migration {
             $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air
             $table->integer('ACCEPT')->nullable();
             $table->integer('DONE')->nullable();
+            $table->integer('BestCase')->nullable();
+            $table->integer('CustomsClearness')->nullable();
+            $table->integer('Tracking')->nullable();
             $table->timestamps();
         });
     }

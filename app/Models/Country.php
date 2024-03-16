@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'id','Name' 
+        'id','Name'
     ];
     public function Ports()
     {
-        return $this->hasMany(Ports::class);
+        return $this->hasMany(ports::class);
     }
 }

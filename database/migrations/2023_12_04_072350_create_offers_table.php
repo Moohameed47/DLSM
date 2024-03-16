@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('FT');
             $table->string('OF');
             $table->string('THC');
+            $table->string('From');
+            $table->string('TO');
             $table->integer('ExtraFees');
             $table->string('PowerPerDay');
             $table->timestamps();

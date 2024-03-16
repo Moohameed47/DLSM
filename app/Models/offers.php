@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class offers extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'agents_id', 'Price', 'PL', 'TT', 'FT' ,'OF','THC','ExtraFees','PowerPerDay','request_id'
+        'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'ExtraFees', 'PowerPerDay', 'request_id', 'From', 'To'
     ];
-    
+
     public function agent()
     {
         return $this->belongsTo(agents::class);
