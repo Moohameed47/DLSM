@@ -42,13 +42,6 @@ class offerController extends Controller
     {
         $req->validate([
             "Price" => "required",
-            "PL" => "required",
-            "TT" => "required",
-            "FT" => "required",
-            "OF" => "required",
-            "THC" => "required",
-            "ExtraFees" => "required",
-            "PowerPerDay" => "required",
             "agents_id" => "required",
             "request_id" => "required",
             "From" => "required",

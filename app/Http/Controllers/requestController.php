@@ -6,6 +6,7 @@ use App\Models\offers;
 use App\Models\requests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+
 class requestController extends Controller
 {
 
@@ -56,10 +57,6 @@ class requestController extends Controller
                 "Location" => "required",
                 "Destination" => "required",
                 "Weight" => "required",
-                "Length" => "required",
-                "Width" => "required",
-                "Height" => "required",
-                "Comment" => "required",
                 "GoodsType" => "required",
                 "Transport" => "required",
             ]);
@@ -96,7 +93,8 @@ class requestController extends Controller
                     "ContainerTypeAndSize" => $req->ContainerTypeAndSize,
                     "NumberOfContainer" => $req->NumberOfContainer,
                     "TypeOfRequest" => 2,
-                    "TypeOfInternational" => 2
+                    "TypeOfInternational" => 2,
+                    "client_id" => $req->client_id,
                 ]);
                 return response()->json([
                     "status" => true,
