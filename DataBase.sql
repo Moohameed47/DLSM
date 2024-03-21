@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2024 at 03:40 AM
+-- Generation Time: Mar 18, 2024 at 07:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -84,10 +84,10 @@ CREATE TABLE `clients` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `country`
+-- Table structure for table `countries`
 --
 
-CREATE TABLE `country` (
+CREATE TABLE `countries` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `Name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -95,10 +95,10 @@ CREATE TABLE `country` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `country`
+-- Dumping data for table `countries`
 --
 
-INSERT INTO `country` (`id`, `Name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `countries` (`id`, `Name`, `created_at`, `updated_at`) VALUES
 (1, 'Afghanistan', NULL, NULL),
 (2, 'Albania', NULL, NULL),
 (3, 'Algeria', NULL, NULL),
@@ -4894,9 +4894,9 @@ ALTER TABLE `clients`
   ADD UNIQUE KEY `clients_email_unique` (`Email`);
 
 --
--- Indexes for table `country`
+-- Indexes for table `countries`
 --
-ALTER TABLE `country`
+ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4979,9 +4979,9 @@ ALTER TABLE `clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `country`
+-- AUTO_INCREMENT for table `countries`
 --
-ALTER TABLE `country`
+ALTER TABLE `countries`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
@@ -5047,7 +5047,7 @@ ALTER TABLE `offers`
 -- Constraints for table `ports`
 --
 ALTER TABLE `ports`
-  ADD CONSTRAINT `ports_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `ports_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `requests`

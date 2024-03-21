@@ -10,8 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   
-        Schema::create('country', function (Blueprint $table) {
+    {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('Name');
             $table->timestamps();

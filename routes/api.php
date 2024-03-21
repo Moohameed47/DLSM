@@ -68,5 +68,6 @@ Route::get('offers/request/{id}', [offerController::class, 'offersForSpecificReq
 // Create - ports
 Route::post('port-create', [portController::class, 'store']);
 
-
+// Edit
+Route::post('myData-edit/{id}/{TypeOfClient}', [profileController::class, 'update']);
 
