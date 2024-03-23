@@ -13,8 +13,8 @@ class requests extends Model
         'client_id', 'fac_ex_im_id', 'Country', 'Location', 'Destination',
         'Comment', 'GoodsType', 'Weight', 'Height', 'Lenght', 'Width', 'Transport',
         'TypesOfTruck', 'WeightOfSingleCarton', 'ContainerTypeAndSize', 'NumberOfContainer',
-        'Safety', 'TypeOfRequest', 'TypeOfInternational', 'client_id', 'ACCEPT', 'DONE', 'BestCase',
-        'CustomsClearness', 'Tracking',
+        'Safety', 'TypeOfRequest', 'TypeOfInternational', 'client_id', 'ACCEPT','ACCEPT_ID', 'DONE', 'BestCase',
+        'CustomsClearness', 'Tracking', 'TruckingPrice','CustomsPrice'
     ];
 
 //    public function factory()

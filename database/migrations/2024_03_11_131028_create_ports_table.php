@@ -13,8 +13,7 @@ return new class extends Migration {
         Schema::create('ports', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('country')->onDelete('cascade');
+            $table->foreignId('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
         });
     }

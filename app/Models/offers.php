@@ -17,4 +17,9 @@ class offers extends Model
     {
         return $this->belongsTo(agents::class);
     }
+    public function request()
+    {
+        return $this->belongsTo(requests::class);
+    }
+
 }

@@ -15,6 +15,27 @@ class offerController extends Controller
         return offers::orderBy('Price', 'asc')->get();
     }
 
+    public function indexNotAccept()
+    {
+        return Offers::whereHas('request', function ($query) {
+            $query->where('ACCEPT', null);
+        })->orderBy('Price', 'asc')->get();
+    }
+
+    public function AcceptOffers($id)
+    {
+        $rqq = requests::all()->where('client_id', $id)->first();
+        $iid = $id;
+        $rqq->update([
+            "ACCEPT" => 1,
+            "ACCEPT_ID" => $iid,
+        ]);
+        return response()->json([
+            "status" => true,
+            "message" => "This Offer Has Been Accepted" . $rqq->ACCEPT_ID
+        ]);
+    }
+
     public function offerForSpecificAgent($agentId)
     {
         $agent = agents::find($agentId);
@@ -25,11 +46,6 @@ class offerController extends Controller
     public function offersForSpecificRequest($id)
     {
         return offers::all()->where('request_id', $id);
-    }
-
-    public function request()
-    {
-        return $this->belongsTo(requests::class);
     }
 
     public function show($id)
@@ -60,10 +76,22 @@ class offerController extends Controller
             "PowerPerDay" => $req->PowerPerDay,
             "agents_id" => $req->agents_id,
             "request_id" => $req->request_id,
+            "CustomsPrice" => $req->CustomsPrice,
+            "TruckingPrice" => $req->TruckingPrice,
         ]);
         return response()->json([
             "status" => true,
             "message" => "Offer Sent Successfully",
         ]);
+    }
+
+    public function getAgentAndShippingData()
+    {
+        $offers = Offers::with(['agent', 'agent.shippingCompany'])
+            ->get();
+        foreach ($offers as $offer) {
+            $agentName = $offer->agent ? $offer->agent->name : 'N/A';
+            return $agentName;
+        }
     }
 }

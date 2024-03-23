@@ -13,7 +13,6 @@ return new class extends Migration {
         Schema::create('requests', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
-//            $table->foreignId('fac_ex_im_id')->references('id')->on('fac_ex_im_companies')->onDelete('cascade');
             $table->string('Location');
             $table->string('Destination');
             $table->string('Comment');
@@ -35,6 +34,7 @@ return new class extends Migration {
             $table->string('TypeOfRequest'); // 1 DHL  // 2 International // 3 Local
             $table->string('TypeOfInternational')->nullable(); // Wild // Sea // Air
             $table->integer('ACCEPT')->nullable();
+            $table->integer('ACCEPT_ID')->nullable();
             $table->integer('DONE')->nullable();
             $table->integer('BestCase')->nullable();
             $table->integer('CustomsClearness')->nullable();

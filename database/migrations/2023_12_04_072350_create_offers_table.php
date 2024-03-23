@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->string('TO');
             $table->integer('ExtraFees');
             $table->string('PowerPerDay');
+            $table->integer('CustomsPrice');
+            $table->integer('TruckingPrice');
             $table->timestamps();
         });
     }

@@ -29,45 +29,60 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Get All Data From DB
+
+//Admins
 Route::get('admins', [adminController::class, 'index']);
-Route::get('clients', [clientController::class, 'index_client']);
-Route::get('All_Clients', [clientController::class, 'index']);
-Route::get('agents', [agentController::class, 'index']);
-Route::get('shipping_companies', [shipping_companyController::class, 'index']);
-Route::get('ex_im_companies', [clientController::class, 'index_ex_im']);
-Route::get('fac_companies', [clientController::class, 'index_fac']);
-Route::get('offers', [offerController::class, 'index']);
-Route::get('requests', [requestController::class, 'index']);
-Route::post('myData', [profileController::class, 'index']);
-Route::get('ShippingAgent/{id}', [agentController::class, 'ShippingAgent']);
-Route::get('Countries', [countryController::class, 'index']);
 
-//Login & Register
-Route::post('register', [registerController::class, 'register']);
-Route::post('login', [loginController::class, 'login']);
-
-//Requests
-Route::get('requests/{id}', [requestController::class, 'show']);
-Route::post('requests-create', [requestController::class, 'store']);
-
-//Offers
-Route::get('offers/{id}', [offerController::class, 'show']);
-Route::post('offers-create', [offerController::class, 'store']);
 
 //Agents
 Route::get('agents/{id}', [agentController::class, 'show']);
 Route::get('agents/destroy/{id}', [agentController::class, 'delete']);
 Route::post('agents-create', [agentController::class, 'store']);
+Route::get('agents', [agentController::class, 'index']);
+Route::get('ShippingAgent/{id}', [agentController::class, 'ShippingAgent']);
 
-// Retrieve all First for a specific Second
-Route::get('offers/agent/{id}', [offerController::class, 'offerForSpecificAgent']);
+
+//Shipping
+Route::get('shipping_companies', [shipping_companyController::class, 'index']);
 Route::get('shipping/agent/{id}', [shipping_companyController::class, 'shippingForSpecificAgent']);
+
+
+//Client
+Route::get('clients', [clientController::class, 'index_client']);
+Route::get('All_Clients', [clientController::class, 'index']);
+Route::get('ex_im_companies', [clientController::class, 'index_ex_im']);
+Route::get('fac_companies', [clientController::class, 'index_fac']);
+
+
+//Offers
+Route::get('offers/{id}', [offerController::class, 'show']);
+Route::post('offers-create', [offerController::class, 'store']);
+Route::get('offers', [offerController::class, 'index']);
+Route::get('offersNotAccept', [offerController::class, 'indexNotAccept']);
 Route::get('offers/request/{id}', [offerController::class, 'offersForSpecificRequest']);
+Route::get('offers/agent/{id}', [offerController::class, 'offerForSpecificAgent']);
+Route::get('offer-accept/{id}', [offerController::class, 'AcceptOffers']);
+Route::get('getAgentAndShippingData/{id}',[offerController::class,'getAgentAndShippingData']);
+//Requests
+Route::get('requests/{id}', [requestController::class, 'show']);
+Route::post('requests-create', [requestController::class, 'store']);
+Route::get('requests', [requestController::class, 'index']);
 
-// Create - ports
-Route::post('port-create', [portController::class, 'store']);
 
-// Edit
+//Profile
+Route::post('myData', [profileController::class, 'index']);
 Route::post('myData-edit/{id}/{TypeOfClient}', [profileController::class, 'update']);
 
+
+//Country
+Route::get('Countries', [countryController::class, 'index']);
+
+
+//Ports
+Route::post('port-create', [portController::class, 'store']);
+Route::post('port-show/{id}', [portController::class, 'show']);
+
+
+//Login & Register
+Route::post('register', [registerController::class, 'register']);
+Route::post('login', [loginController::class, 'login']);
