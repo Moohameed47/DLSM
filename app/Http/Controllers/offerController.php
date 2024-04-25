@@ -19,7 +19,7 @@ class offerController extends Controller
     {
         return Offers::whereHas('request', function ($query) {
             $query->where('ACCEPT', null);
-        })->orderBy('Price', 'asc')->get();
+        })->orderBy('Price', 'desc')->get();
     }
 
     public function AcceptOffers($id)
@@ -63,22 +63,71 @@ class offerController extends Controller
             "From" => "required",
             "To" => "required",
         ]);
-        offers::create([
-            "Price" => $req->Price,
-            "PL" => $req->PL,
-            "TT" => $req->TT,
-            "FT" => $req->FT,
-            "OF" => $req->OF,
-            "From" => $req->From,
-            "To" => $req->To,
-            "THC" => $req->To,
-            "ExtraFees" => $req->ExtraFees,
-            "PowerPerDay" => $req->PowerPerDay,
-            "agents_id" => $req->agents_id,
-            "request_id" => $req->request_id,
-            "CustomsPrice" => $req->CustomsPrice,
-            "TruckingPrice" => $req->TruckingPrice,
-        ]);
+        $Requestaya = requests::all()->where('id', $req->request_id)->first();
+        if ($Requestaya->CustomsClearness == 1 && $Requestaya->Tracking == 1)
+            offers::create([
+                "Price" => $req->Price,
+                "PL" => $req->PL,
+                "TT" => $req->TT,
+                "FT" => $req->FT,
+                "OF" => $req->OF,
+                "From" => $req->From,
+                "To" => $req->To,
+                "THC" => $req->THC,
+                "ExtraFees" => $req->ExtraFees,
+                "PowerPerDay" => $req->PowerPerDay,
+                "agents_id" => $req->agents_id,
+                "request_id" => $req->request_id,
+                "CustomsPrice" => $req->CustomsPrice,
+                "TruckingPrice" => $req->TruckingPrice,
+            ]);
+        else if ($Requestaya->CustomsClearness == 1)
+            offers::create([
+                "Price" => $req->Price,
+                "PL" => $req->PL,
+                "TT" => $req->TT,
+                "FT" => $req->FT,
+                "OF" => $req->OF,
+                "From" => $req->From,
+                "To" => $req->To,
+                "THC" => $req->THC,
+                "ExtraFees" => $req->ExtraFees,
+                "PowerPerDay" => $req->PowerPerDay,
+                "agents_id" => $req->agents_id,
+                "request_id" => $req->request_id,
+                "CustomsPrice" => $req->CustomsPrice,
+            ]);
+        else if ($Requestaya->Tracking == 1)
+            offers::create([
+                "Price" => $req->Price,
+                "PL" => $req->PL,
+                "TT" => $req->TT,
+                "FT" => $req->FT,
+                "OF" => $req->OF,
+                "From" => $req->From,
+                "To" => $req->To,
+                "THC" => $req->THC,
+                "ExtraFees" => $req->ExtraFees,
+                "PowerPerDay" => $req->PowerPerDay,
+                "agents_id" => $req->agents_id,
+                "request_id" => $req->request_id,
+                "TruckingPrice" => $req->TruckingPrice,
+            ]);
+        else
+            offers::create([
+                "Price" => $req->Price,
+                "PL" => $req->PL,
+                "TT" => $req->TT,
+                "FT" => $req->FT,
+                "OF" => $req->OF,
+                "From" => $req->From,
+                "To" => $req->To,
+                "THC" => $req->THC,
+                "ExtraFees" => $req->ExtraFees,
+                "PowerPerDay" => $req->PowerPerDay,
+                "agents_id" => $req->agents_id,
+                "request_id" => $req->request_id,
+            ]);
         return response()->json([
             "status" => true,
             "message" => "Offer Sent Successfully",

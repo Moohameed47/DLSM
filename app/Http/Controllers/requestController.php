@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\offers;
 use App\Models\requests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
 class requestController extends Controller
@@ -52,13 +51,16 @@ class requestController extends Controller
                 "status" => true,
                 "message" => "DHL Request Sent Successfully",
             ]);
-        } else if ($req->req_type == 2) { // That's Mean International
+        }
+        if ($req->req_type == 2) { // That's Mean International
             $req->validate([
                 "Location" => "required",
                 "Destination" => "required",
                 "Weight" => "required",
                 "GoodsType" => "required",
                 "Transport" => "required",
+                "CustomsClearness" => "required",
+                "Tracking" => "required",
             ]);
             if ($req->Transport == 1) { // That's mean Wild
                 requests::create([
@@ -75,6 +77,8 @@ class requestController extends Controller
                     "TypeOfRequest" => 2,
                     "TypeOfInternational" => 1,
                     "client_id" => $req->client_id,
+                    "CustomsClearness" => $req->CustomsClearness ? $req->CustomsClearness : 0,
+                    "Tracking" => $req->Tracking ? $req->Tracking : 0,
                 ]);
                 return response()->json([
                     "status" => true,
@@ -95,6 +99,8 @@ class requestController extends Controller
                     "TypeOfRequest" => 2,
                     "TypeOfInternational" => 2,
                     "client_id" => $req->client_id,
+                    "CustomsClearness" => $req->CustomsClearness ? $req->CustomsClearness : 0,
+                    "Tracking" => $req->Tracking ? $req->Tracking : 0,
                 ]);
                 return response()->json([
                     "status" => true,
@@ -115,13 +121,16 @@ class requestController extends Controller
                     "TypeOfRequest" => 2,
                     "TypeOfInternational" => 3,
                     "client_id" => $req->client_id,
+                    "CustomsClearness" => $req->CustomsClearness ? $req->CustomsClearness : 0,
+                    "Tracking" => $req->Tracking ? $req->Tracking : 0,
                 ]);
                 return response()->json([
                     "status" => true,
                     "message" => "International ( Air ) Request Sent Successfully",
                 ]);
             }
-        } else if ($req->req_type == 3) { // That's Mean Local
+        }
+        else if ($req->req_type == 3) { // That's Mean Local
             $req->validate([
                 "Country" => "required",
                 "Location" => "required",
