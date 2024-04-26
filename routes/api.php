@@ -86,3 +86,14 @@ Route::post('port-show/{id}', [portController::class, 'show']);
 //Login & Register
 Route::post('register', [registerController::class, 'register']);
 Route::post('login', [loginController::class, 'login']);
+
+
+//process
+Route::get('current_Process/{id}', [requestController::class, 'current_Process']);
+Route::get('updateBooking/{id}', [requestController::class, 'updateBooking']);
+Route::get('updateLoading/{id}', [requestController::class, 'updateLoading']);
+Route::get('updateTrucking/{id}', [requestController::class, 'updateTrucking']);
+Route::get('updateCustom_clearance/{id}', [requestController::class, 'updateCustom_clearance']);
+Route::get('updateDone/{id}', [requestController::class, 'updateDone']);
+Route::get('updateOn_trip/{id}', [requestController::class, 'updateOn_trip']);
+

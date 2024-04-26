@@ -20,6 +20,87 @@ class requestController extends Controller
         return $requests == null ? "Not Found" : $requests;
     }
 
+    public function updateBooking($id) // Booking
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 1
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+    public function updateLoading($id) // Loading
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 2
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+    public function updateTrucking($id) // Trucking
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 3
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+    public function updateCustom_clearance($id) // Custom clearance
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 4
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+    public function updateDone($id) // Done
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 5
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+    public function updateOn_trip($id) // On trip
+    {
+        $requestToUpdate = requests::find($id);
+        if ($requestToUpdate == null) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+        $requestToUpdate->update([
+            'BestCase' => 6
+        ]);
+        return response()->json(['message' => 'Now Process => Booking'], 200);
+    }
+
+    public function current_Process($id){
+        $requestToUpdate = requests::find($id);
+        return $requestToUpdate->BestCase;
+    }
+/*
+updateBooking
+updateLoading
+updateTrucking
+updateCustom_clearance
+updateDone
+updateOn_trip
+*/
+
+
     public function delete($id)
     {
         $requests = requests::all()->where('id', $id)->delete();
