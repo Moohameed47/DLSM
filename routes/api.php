@@ -96,4 +96,3 @@ Route::get('updateTrucking/{id}', [requestController::class, 'updateTrucking']);
 Route::get('updateCustom_clearance/{id}', [requestController::class, 'updateCustom_clearance']);
 Route::get('updateDone/{id}', [requestController::class, 'updateDone']);
 Route::get('updateOn_trip/{id}', [requestController::class, 'updateOn_trip']);
-
