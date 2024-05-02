@@ -61,8 +61,10 @@ Route::get('offers', [offerController::class, 'index']);
 Route::get('offersNotAccept', [offerController::class, 'indexNotAccept']);
 Route::get('offers/request/{id}', [offerController::class, 'offersForSpecificRequest']);
 Route::get('offers/agent/{id}', [offerController::class, 'offerForSpecificAgent']);
-Route::get('offer-accept/{id}', [offerController::class, 'AcceptOffers']);
-Route::get('getAgentAndShippingData/{id}',[offerController::class,'getAgentAndShippingData']);
+Route::get('offer-accept/{request_id}/{offer_id}', [offerController::class, 'AcceptOffers']);
+Route::get('getAgentAndShippingData/{id}', [offerController::class, 'getAgentAndShippingData']);
+Route::get('Which-offer-accept', [offerController::class, 'WhichOfferAccept']);
+
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);
 Route::post('requests-create', [requestController::class, 'store']);

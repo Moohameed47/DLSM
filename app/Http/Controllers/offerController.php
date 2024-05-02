@@ -22,20 +22,27 @@ class offerController extends Controller
         })->orderBy('Price', 'desc')->get();
     }
 
-    public function AcceptOffers($id)
+    public function AcceptOffers($request_id, $offer_id)
     {
-        $rqq = requests::all()->where('client_id', $id)->first();
-        $iid = $id;
+        $rqq = requests::all()->where('id', $request_id)->first();
         $rqq->update([
             "ACCEPT" => 1,
-            "ACCEPT_ID" => $iid,
+            "ACCEPT_ID" => $offer_id,
         ]);
         return response()->json([
             "status" => true,
             "message" => "This Offer Has Been Accepted" . $rqq->ACCEPT_ID
         ]);
     }
-
+    public function WhichOfferAccept($request_id)
+    {
+        $rqq = requests::all()->where('id', $request_id)->first();
+        $offer = Offers::all()->where('id', $rqq->ACCEPT_ID)->first();
+        return  response()->json([
+            "status" => true,
+            "message" => $offer
+        ]);
+    }
     public function offerForSpecificAgent($agentId)
     {
         $agent = agents::find($agentId);
