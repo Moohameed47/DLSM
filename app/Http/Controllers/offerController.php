@@ -12,7 +12,7 @@ class offerController extends Controller
 
     public function index()
     {
-        return offers::orderBy('Price', 'asc')->get();
+        return offers::orderBy('Price', 'desc')->get();
     }
 
     public function indexNotAccept()
@@ -64,7 +64,8 @@ class offerController extends Controller
             "To" => "required",
         ]);
         $Requestaya = requests::all()->where('id', $req->request_id)->first();
-        if ($Requestaya->CustomsClearness == 1 && $Requestaya->Tracking == 1)
+
+        if ($Requestaya->CustomsClearness == "1" && $Requestaya->Tracking == "1") {
             offers::create([
                 "Price" => $req->Price,
                 "PL" => $req->PL,
@@ -81,7 +82,7 @@ class offerController extends Controller
                 "CustomsPrice" => $req->CustomsPrice,
                 "TruckingPrice" => $req->TruckingPrice,
             ]);
-        else if ($Requestaya->CustomsClearness == 1)
+        } else if ($Requestaya->CustomsClearness == "1") {
             offers::create([
                 "Price" => $req->Price,
                 "PL" => $req->PL,
@@ -96,8 +97,9 @@ class offerController extends Controller
                 "agents_id" => $req->agents_id,
                 "request_id" => $req->request_id,
                 "CustomsPrice" => $req->CustomsPrice,
+                "TruckingPrice" => 0,
             ]);
-        else if ($Requestaya->Tracking == 1)
+        } else if ($Requestaya->Tracking == "1")
             offers::create([
                 "Price" => $req->Price,
                 "PL" => $req->PL,
@@ -112,6 +114,7 @@ class offerController extends Controller
                 "agents_id" => $req->agents_id,
                 "request_id" => $req->request_id,
                 "TruckingPrice" => $req->TruckingPrice,
+                "CustomsPrice" => 0,
             ]);
         else
             offers::create([
@@ -127,6 +130,8 @@ class offerController extends Controller
                 "PowerPerDay" => $req->PowerPerDay,
                 "agents_id" => $req->agents_id,
                 "request_id" => $req->request_id,
+                "CustomsPrice" => 0,
+                "TruckingPrice" => 0,
             ]);
         return response()->json([
             "status" => true,
