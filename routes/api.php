@@ -81,8 +81,9 @@ Route::get('Countries', [countryController::class, 'index']);
 
 
 //Ports
+Route::get('ports', [portController::class, 'index']);
 Route::post('port-create', [portController::class, 'store']);
-Route::post('port-show/{id}', [portController::class, 'show']);
+Route::get('port-show/{id}', [portController::class, 'show']);
 
 
 //Login & Register

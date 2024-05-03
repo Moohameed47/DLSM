@@ -13,9 +13,11 @@ class portController extends Controller
         return ports::all();
     }
 
-    public function show($id){
-        return ports::all()->where('country_id',$id);
+    public function show($id)
+    {
+        return ports::all()->where('country_id', $id)->values()->toArray();
     }
+
     public function store(Request $request)
     {
         $request->validate([

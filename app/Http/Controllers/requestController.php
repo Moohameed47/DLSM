@@ -75,7 +75,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => On trip'], 200);
     }
-     public function updateDone($id) // Done
+    public function updateDone($id) // Done
     {
         $requestToUpdate = requests::find($id);
         if ($requestToUpdate == null) {
@@ -86,13 +86,14 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => Done'], 200);
     }
-   
 
-    public function current_Process($id){
+
+    public function current_Process($id)
+    {
         $requestToUpdate = requests::find($id);
         return $requestToUpdate->BestCase;
     }
-/*
+    /*
 updateBooking
 updateLoading
 updateTrucking
@@ -118,12 +119,16 @@ updateDone
             $req->validate([
                 "Location" => "required",
                 "Destination" => "required",
+                "Location2" => "required",
+                "Destination2" => "required",
                 "Comment" => "required",
                 "GoodsType" => "required",
             ]);
             requests::create([
                 "Location" => $req->Location,
                 "Destination" => $req->Destination,
+                "Location2" => $req->Location2,
+                "Destination2" => $req->Destination2,
                 "Comment" => $req->Comment,
                 "GoodsType" => $req->GoodsType,
                 "TypeOfRequest" => 1,
@@ -138,6 +143,8 @@ updateDone
             $req->validate([
                 "Location" => "required",
                 "Destination" => "required",
+                "Location2" => "required",
+                "Destination2" => "required",
                 "Weight" => "required",
                 "GoodsType" => "required",
                 "Transport" => "required",
@@ -148,6 +155,8 @@ updateDone
                 requests::create([
                     "Location" => $req->Location,
                     "Destination" => $req->Destination,
+                    "Location2" => $req->Location2,
+                    "Destination2" => $req->Destination2,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
@@ -170,6 +179,8 @@ updateDone
                 requests::create([
                     "Location" => $req->Location,
                     "Destination" => $req->Destination,
+                    "Location2" => $req->Location2,
+                    "Destination2" => $req->Destination2,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
@@ -192,6 +203,8 @@ updateDone
                 requests::create([
                     "Location" => $req->Location,
                     "Destination" => $req->Destination,
+                    "Location2" => $req->Location2,
+                    "Destination2" => $req->Destination2,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
@@ -211,12 +224,13 @@ updateDone
                     "message" => "International ( Air ) Request Sent Successfully",
                 ]);
             }
-        }
-        else if ($req->req_type == 3) { // That's Mean Local
+        } else if ($req->req_type == 3) { // That's Mean Local
             $req->validate([
                 "Country" => "required",
                 "Location" => "required",
                 "Destination" => "required",
+                "Location2" => "required",
+                "Destination2" => "required",
                 "GoodsType" => "required",
                 "Weight" => "required",
                 "Comment" => "required",
@@ -227,8 +241,8 @@ updateDone
                 ]);
                 requests::create([
                     "Country" => $req->Country,
-                    "Location" => $req->Location,
-                    "Destination" => $req->Destination,
+                    "Location" => $req->Location2,
+                    "Destination" => $req->Destination2,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
                     "Safety" => $req->Safety,
@@ -243,8 +257,8 @@ updateDone
             } else {
                 requests::create([
                     "Country" => $req->Country,
-                    "Location" => $req->Location,
-                    "Destination" => $req->Destination,
+                    "Location" => $req->Location2,
+                    "Destination" => $req->Destination2,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
