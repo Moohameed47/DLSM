@@ -22,4 +22,13 @@ class clients extends Model
     {
         return $this->hasMany(requests::class);
     }
+    public function posts()
+    {
+        return $this->hasManyThrough(
+            Post::class,
+            shipping_companies::class,
+            'shipping_companies_id',
+            'id'
+        );
+    }
 }

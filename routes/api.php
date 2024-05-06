@@ -11,6 +11,7 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\requestController;
 use App\Http\Controllers\shipping_companyController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -99,3 +100,11 @@ Route::get('updateTrucking/{id}', [requestController::class, 'updateTrucking']);
 Route::get('updateCustom_clearance/{id}', [requestController::class, 'updateCustom_clearance']);
 Route::get('updateDone/{id}', [requestController::class, 'updateDone']);
 Route::get('updateOn_trip/{id}', [requestController::class, 'updateOn_trip']);
+
+//posts
+Route::get('posts',[PostController::class,'index']);
+Route::get('posts/{id}',[PostController::class,'show']);
+Route::post('posts-update/{id}',[PostController::class,'update']);
+Route::get('posts-destroy/{id}',[PostController::class,'update']);
+Route::post('posts-create',[PostController::class,'store']);
+

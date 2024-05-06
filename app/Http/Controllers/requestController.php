@@ -31,6 +31,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => Booking'], 200);
     }
+
     public function updateLoading($id) // Loading
     {
         $requestToUpdate = requests::find($id);
@@ -42,6 +43,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => Loading'], 200);
     }
+
     public function updateTrucking($id) // Trucking
     {
         $requestToUpdate = requests::find($id);
@@ -53,6 +55,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => Trucking'], 200);
     }
+
     public function updateCustom_clearance($id) // Custom clearance
     {
         $requestToUpdate = requests::find($id);
@@ -64,6 +67,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => Custom clearance'], 200);
     }
+
     public function updateOn_trip($id) // On trip
     {
         $requestToUpdate = requests::find($id);
@@ -75,6 +79,7 @@ class requestController extends Controller
         ]);
         return response()->json(['message' => 'Now Process => On trip'], 200);
     }
+
     public function updateDone($id) // Done
     {
         $requestToUpdate = requests::find($id);
@@ -93,6 +98,7 @@ class requestController extends Controller
         $requestToUpdate = requests::find($id);
         return $requestToUpdate->BestCase;
     }
+
     /*
 updateBooking
 updateLoading
@@ -229,8 +235,6 @@ updateDone
                 "Country" => "required",
                 "Location" => "required",
                 "Destination" => "required",
-                "Location2" => "required",
-                "Destination2" => "required",
                 "GoodsType" => "required",
                 "Weight" => "required",
                 "Comment" => "required",
@@ -241,8 +245,10 @@ updateDone
                 ]);
                 requests::create([
                     "Country" => $req->Country,
-                    "Location" => $req->Location2,
-                    "Destination" => $req->Destination2,
+                    "Location" => $req->Location,
+                    "Destination" => $req->Destination,
+                    "Location2" =>0,
+                    "Destination2" => 0,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
                     "Safety" => $req->Safety,
@@ -257,8 +263,10 @@ updateDone
             } else {
                 requests::create([
                     "Country" => $req->Country,
-                    "Location" => $req->Location2,
-                    "Destination" => $req->Destination2,
+                    "Location" => $req->Location,
+                    "Destination" => $req->Destination,
+                    "Location2" =>0,
+                    "Destination2" => 0,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
