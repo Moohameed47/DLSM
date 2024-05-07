@@ -46,6 +46,7 @@ Route::get('ShippingAgent/{id}', [agentController::class, 'ShippingAgent']);
 //Shipping
 Route::get('shipping_companies', [shipping_companyController::class, 'index']);
 Route::get('shipping/agent/{id}', [shipping_companyController::class, 'shippingForSpecificAgent']);
+Route::post('shipping-search', [shipping_companyController::class, 'search']);
 
 
 //Client
