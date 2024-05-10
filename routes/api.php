@@ -10,6 +10,7 @@ use App\Http\Controllers\portController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\requestController;
+use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\shipping_companyController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
@@ -109,3 +110,9 @@ Route::post('posts-update/{id}',[PostController::class,'update']);
 Route::get('posts-destroy/{id}',[PostController::class,'update']);
 Route::post('posts-create',[PostController::class,'store']);
 
+//Feedback
+Route::get('feedback', [feedbackController::class, 'index']);
+Route::get('feedback/{id}', [feedbackController::class, 'show']);
+Route::post('feedback-create', [feedbackController::class, 'store']);
+Route::post('feedback-update/{id}', [feedbackController::class, 'update']);
+Route::get('feedback-destroy/{id}', [feedbackController::class, 'destroy']);

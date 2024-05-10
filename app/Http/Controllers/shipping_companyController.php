@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\feedback;
 use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,10 @@ class shipping_companyController extends Controller
 
     public function shippingForSpecificAgent($shipping_id){
         return shipping_companies::all()->where('id',$shipping_id);
+    }
+    public function feedback()
+    {
+        return $this->hasMany(feedback::class);
     }
 
 }
