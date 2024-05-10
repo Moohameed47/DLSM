@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class feedbackController extends Controller
 {
@@ -49,5 +50,14 @@ class feedbackController extends Controller
         $feedback->delete();
 
         return response()->json(null, 204); // No Content status code
+    }
+
+    public function getAverageRatings()
+    {
+        $averageRatings = Feedback::select('shipping_company_id', DB::raw('AVG(rate) as average_rate'))
+            ->groupBy('shipping_company_id')
+            ->get();
+
+        return response()->json($averageRatings);
     }
 }

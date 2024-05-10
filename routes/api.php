@@ -116,3 +116,5 @@ Route::get('feedback/{id}', [feedbackController::class, 'show']);
 Route::post('feedback-create', [feedbackController::class, 'store']);
 Route::post('feedback-update/{id}', [feedbackController::class, 'update']);
 Route::get('feedback-destroy/{id}', [feedbackController::class, 'destroy']);
+
+Route::get('feedback/avg-rate', [FeedbackController::class, 'getAverageRatings']);
