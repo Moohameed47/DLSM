@@ -17,4 +17,8 @@ class shipping_companies extends Model
     {
         return $this->hasMany(agents::class);
     }
+    public function posts()
+    {
+        return $this->hasMany(posts::class);
+    }
 }

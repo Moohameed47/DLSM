@@ -15,7 +15,7 @@ class agents extends Model
 
     public function shipping_companies()
     {
-        return $this->belongsTo(shipping_companies::class);
+        return $this->belongsTo(shipping_companies::class, 'shipping_id');
     }
     public function offers()
     {

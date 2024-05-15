@@ -24,6 +24,6 @@ class requests extends Model
 
     public function client()
     {
-        return $this->belongsTo(clients::class);
+        return $this->belongsTo(clients::class ,  'client_id');
     }
 }

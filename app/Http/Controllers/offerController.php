@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\agents;
 use App\Models\offers;
 use App\Models\requests;
+use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 
 class offerController extends Controller
@@ -17,9 +18,13 @@ class offerController extends Controller
 
     public function indexNotAccept()
     {
-        return Offers::whereHas('request', function ($query) {
+        return Offers::with('agent.shipping_companies') // Eager load with name only
+        ->whereHas('request', function ($query) {
             $query->where('ACCEPT', null);
-        })->orderBy('Price', 'desc')->get();
+        })
+            ->whereHas('agent') // Ensure agent relationship exists
+            ->orderBy('Price', 'desc')
+            ->get();
     }
 
     public function AcceptOffers($request_id, $offer_id)

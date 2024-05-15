@@ -25,7 +25,7 @@ class clients extends Model
     public function posts()
     {
         return $this->hasManyThrough(
-            Post::class,
+            posts::class,
             shipping_companies::class,
             'shipping_companies_id',
             'id'

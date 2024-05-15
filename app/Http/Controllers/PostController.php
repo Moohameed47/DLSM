@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\posts;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        return $posts;
+        return posts::with('shipping_companies')->whereHas('shipping_companies')->get();
     }
 
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = posts::find($id);
         if (!$post) {
             return abort(404); // Handle post not found
         }
@@ -24,7 +23,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = posts::find($id);
         if (!$post) {
             return abort(404); // Handle post not found
         }
@@ -37,7 +36,7 @@ class PostController extends Controller
         $post->update($validatedData);
 
         return response()->json(
-            ['message' => 'This Post Has Been Updated',
+            ['message' => 'This posts Has Been Updated',
                 "status" => true,
             ]
         );
@@ -45,7 +44,7 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $post = posts::find($id);
         if (!$post) {
             return abort(404); // Handle post not found
         }
@@ -53,7 +52,7 @@ class PostController extends Controller
         $post->delete();
 
         return response()->json(
-            ['message' => 'This Post Has Been Deleted',
+            ['message' => 'This posts Has Been Deleted',
                 "status" => true,
             ]
         );
@@ -66,12 +65,12 @@ class PostController extends Controller
             'shipping_companies_id' => 'required|integer|exists:shipping_companies,id',
         ]);
 
-        $post = Post::create($validatedData);
+        $post = posts::create($validatedData);
 
         return response()->json(
-            ['message' => 'This New Post Has Been Saved',
+            ['message' => 'This New posts Has Been Saved',
                 "status" => true,
-                "Post" => $post
+                "posts" => $post
             ]
         );
     }

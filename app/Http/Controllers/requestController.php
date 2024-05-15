@@ -11,7 +11,7 @@ class requestController extends Controller
 
     public function index()
     {
-        return requests::all();
+        return requests::with('client')->whereHas('client')->get();
     }
 
     public function show($id)

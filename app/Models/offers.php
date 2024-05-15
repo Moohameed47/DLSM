@@ -15,7 +15,7 @@ class offers extends Model
 
     public function agent()
     {
-        return $this->belongsTo(agents::class);
+        return $this->belongsTo(agents::class , "agents_id");
     }
     public function request()
     {

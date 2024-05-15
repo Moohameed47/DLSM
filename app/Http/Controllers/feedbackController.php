@@ -52,10 +52,11 @@ class feedbackController extends Controller
         return response()->json(null, 204); // No Content status code
     }
 
-    public function getAverageRatings()
+    public function getAverageRatingById($id)
     {
         $averageRatings = Feedback::select('shipping_company_id', DB::raw('AVG(rate) as average_rate'))
             ->groupBy('shipping_company_id')
+            ->where('shipping_company_id', $id)
             ->get();
 
         return response()->json($averageRatings);
