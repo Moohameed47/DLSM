@@ -13,17 +13,19 @@ class offerController extends Controller
 
     public function index()
     {
-        $offers = offers::with('request')->orderBy('price', 'desc')->get();
+        $offers = offers::orderBy('price', 'desc')->get();
+        $offers->load('request');
+        $offers->load('agent');
         return $offers;
     }
 
     public function indexNotAccept()
     {
-        return Offers::with('agent.shipping_companies') // Eager load with name only
-        ->whereHas('request', function ($query) {
-            $query->where('ACCEPT', null);
-        })
-            ->whereHas('agent') // Ensure agent relationship exists
+        return Offers::with('agent.shipping_companies')
+            ->whereHas('request', function ($query) {
+                $query->where('ACCEPT', null);
+            })
+            ->whereHas('agent')
             ->orderBy('Price', 'desc')
             ->get();
     }
@@ -40,15 +42,17 @@ class offerController extends Controller
             "message" => "This Offer Has Been Accepted" . $rqq->ACCEPT_ID
         ]);
     }
+
     public function WhichOfferAccept($request_id)
     {
         $rqq = requests::all()->where('id', $request_id)->first();
         $offer = Offers::all()->where('id', $rqq->ACCEPT_ID)->first();
-        return  response()->json([
+        return response()->json([
             "status" => true,
             "message" => $offer
         ]);
     }
+
     public function offerForSpecificAgent($agentId)
     {
         $agent = agents::find($agentId);
