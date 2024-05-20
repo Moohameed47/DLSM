@@ -21,13 +21,14 @@ class offerController extends Controller
 
     public function indexNotAccept()
     {
-        return Offers::with('agent.shipping_companies')
-            ->whereHas('request', function ($query) {
-                $query->where('ACCEPT', null);
-            })
-            ->whereHas('agent')
-            ->orderBy('Price', 'desc')
+        $requests = requests::whereNull('ACCEPT')->get();
+        $offerIds = $requests->pluck('id');
+        $offers = offers::whereIn('id', $offerIds)
+            ->orderBy('price', 'desc')
+            ->with('request', 'agent' , 'agent.shipping_companies')
             ->get();
+
+        return $offers;
     }
 
     public function AcceptOffers($request_id, $offer_id)
@@ -68,7 +69,10 @@ class offerController extends Controller
     public function show($id)
     {
         $offers = offers::all()->where('id', $id)->first();
-        return $offers == null ? "Not Found" : $offers;
+        $offers->load('request');
+        $offers->load('agent');
+        $offers->load('agent.shipping_companies');
+        return $offers;
     }
 
     public function store(Request $req)

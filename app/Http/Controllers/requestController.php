@@ -16,8 +16,11 @@ class requestController extends Controller
 
     public function show($id)
     {
-        $requests = requests::all()->where('id', $id)->first();
-        return $requests == null ? "Not Found" : $requests;
+        $offers = offers::all()->where('request.id',$id)->first();
+        $offers->load('agent');
+        $offers->load('agent.shipping_companies');
+        $offers->load('request.client');
+        return $offers;
     }
 
     public function updateBooking($id) // Booking

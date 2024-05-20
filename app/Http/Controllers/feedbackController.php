@@ -17,6 +17,7 @@ class feedbackController extends Controller
     public function FeedbackByShippingCompanyId($id)
     {
         $feedback = Feedback::where('shipping_company_id', $id)->get();
+        $feedback->load('client');
         if ($feedback->isEmpty()) {
             return response()->json([
                 'message' => 'No feedback found for this shipping company.',

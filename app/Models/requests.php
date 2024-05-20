@@ -17,10 +17,6 @@ class requests extends Model
         'CustomsClearness', 'Tracking', 'TruckingPrice', 'CustomsPrice'
     ];
 
-    //    public function factory()
-    //    {
-    //        return $this->belongsTo(fac_ex_im_companies::class);
-    //    }
 
     public function client()
     {
