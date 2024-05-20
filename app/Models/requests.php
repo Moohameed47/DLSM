@@ -26,4 +26,8 @@ class requests extends Model
     {
         return $this->belongsTo(clients::class ,  'client_id');
     }
+    public function offers()
+    {
+        return $this->hasMany(offers::class);
+    }
 }

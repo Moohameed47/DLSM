@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class requestController extends Controller
 {
 
-    public function index()
-    {
-        return requests::with('client')->whereHas('client')->get();
-    }
+        public function index()
+        {
+            return requests::with('client')->whereHas('client')->get();
+        }
 
     public function show($id)
     {

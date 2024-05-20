@@ -9,7 +9,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        return posts::with('shipping_companies')->whereHas('shipping_companies')->get();
+        return posts::with('shipping_companies')->whereHas('shipping_companies')->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function show($id)

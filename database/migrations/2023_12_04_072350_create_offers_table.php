@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('THC');
             $table->string('From');
             $table->string('TO');
+            $table->string('Comment');
             $table->integer('ExtraFees');
             $table->string('PowerPerDay');
             $table->integer('CustomsPrice');

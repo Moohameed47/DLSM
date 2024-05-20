@@ -13,7 +13,8 @@ class offerController extends Controller
 
     public function index()
     {
-        return offers::orderBy('Price', 'desc')->get();
+        $offers = offers::with('request')->orderBy('price', 'desc')->get();
+        return $offers;
     }
 
     public function indexNotAccept()
@@ -76,7 +77,6 @@ class offerController extends Controller
             "To" => "required",
         ]);
         $Requestaya = requests::all()->where('id', $req->request_id)->first();
-
         if ($Requestaya->CustomsClearness == "1" && $Requestaya->Tracking == "1") {
             offers::create([
                 "Price" => $req->Price,
@@ -86,6 +86,7 @@ class offerController extends Controller
                 "OF" => $req->OF,
                 "From" => $req->From,
                 "To" => $req->To,
+                "Comment" => $req->Comment,
                 "THC" => $req->THC,
                 "ExtraFees" => $req->ExtraFees,
                 "PowerPerDay" => $req->PowerPerDay,
@@ -103,6 +104,7 @@ class offerController extends Controller
                 "OF" => $req->OF,
                 "From" => $req->From,
                 "To" => $req->To,
+                "Comment" => $req->Comment,
                 "THC" => $req->THC,
                 "ExtraFees" => $req->ExtraFees,
                 "PowerPerDay" => $req->PowerPerDay,
@@ -121,6 +123,7 @@ class offerController extends Controller
                 "From" => $req->From,
                 "To" => $req->To,
                 "THC" => $req->THC,
+                "Comment" => $req->Comment,
                 "ExtraFees" => $req->ExtraFees,
                 "PowerPerDay" => $req->PowerPerDay,
                 "agents_id" => $req->agents_id,
@@ -138,6 +141,7 @@ class offerController extends Controller
                 "From" => $req->From,
                 "To" => $req->To,
                 "THC" => $req->THC,
+                "Comment" => $req->Comment,
                 "ExtraFees" => $req->ExtraFees,
                 "PowerPerDay" => $req->PowerPerDay,
                 "agents_id" => $req->agents_id,

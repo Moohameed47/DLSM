@@ -10,15 +10,16 @@ class offers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'ExtraFees', 'PowerPerDay', 'request_id', 'From', 'To', 'CustomsPrice', 'TruckingPrice',
+        'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'Comment', 'ExtraFees', 'PowerPerDay', 'request_id', 'From', 'To', 'CustomsPrice', 'TruckingPrice',
     ];
 
     public function agent()
     {
-        return $this->belongsTo(agents::class , "agents_id");
+        return $this->belongsTo(agents::class, "agents_id");
     }
+
     public function request()
     {
-        return $this->belongsTo(requests::class);
+        return $this->belongsTo(requests::class, 'request_id');
     }
 }
