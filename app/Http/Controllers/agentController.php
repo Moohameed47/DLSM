@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\agents;
+use App\Models\requests;
 
 class agentController extends Controller
 {
     public function index()
     {
-        $agent = agents::all();
-        return $agent;
+        return agents::with('shipping_companies')->whereHas('shipping_companies')->get();
+
+        return agents::all();
     }
     public function ShippingAgent($id){
         $agents = agents::where('shipping_id', $id)->get();
@@ -25,7 +27,7 @@ class agentController extends Controller
     {
         $agent = agents::where('id', $id)->delete();
         return `$id is Deleted`;
-    }  
+    }
 
     public function store()
     {
