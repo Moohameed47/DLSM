@@ -109,6 +109,7 @@ Route::get('posts/{id}', [PostController::class, 'show']);
 Route::post('posts-update/{id}', [PostController::class, 'update']);
 Route::get('posts-destroy/{id}', [PostController::class, 'update']);
 Route::post('posts-create', [PostController::class, 'store']);
+Route::get('posts_Shipping/{id}', [PostController::class, 'posts_Shipping']);
 
 //Feedback
 Route::get('feedback', [feedbackController::class, 'index']);

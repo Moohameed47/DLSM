@@ -13,6 +13,18 @@ class PostController extends Controller
             ->get();
     }
 
+    public function posts_Shipping($id)
+    {
+        $posts = posts::all()->where('shipping_companies_id', $id)->values()->toArray();
+        if ($posts == []) {
+            return response()->json([
+                'status' => "404",
+                'message' => 'No Posts found for this shipping company.',
+            ]);
+        }
+        return $posts;
+    }
+
     public function show($id)
     {
         $post = posts::find($id);
