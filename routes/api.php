@@ -104,11 +104,11 @@ Route::get('updateDone/{id}', [requestController::class, 'updateDone']);
 Route::get('updateOn_trip/{id}', [requestController::class, 'updateOn_trip']);
 
 //posts
-Route::get('posts',[PostController::class,'index']);
-Route::get('posts/{id}',[PostController::class,'show']);
-Route::post('posts-update/{id}',[PostController::class,'update']);
-Route::get('posts-destroy/{id}',[PostController::class,'update']);
-Route::post('posts-create',[PostController::class,'store']);
+Route::get('posts', [PostController::class, 'index']);
+Route::get('posts/{id}', [PostController::class, 'show']);
+Route::post('posts-update/{id}', [PostController::class, 'update']);
+Route::get('posts-destroy/{id}', [PostController::class, 'update']);
+Route::post('posts-create', [PostController::class, 'store']);
 
 //Feedback
 Route::get('feedback', [feedbackController::class, 'index']);
@@ -116,5 +116,5 @@ Route::get('feedback/{id}', [feedbackController::class, 'show']);
 Route::post('feedback-create', [feedbackController::class, 'store']);
 Route::post('feedback-update/{id}', [feedbackController::class, 'update']);
 Route::get('feedback-destroy/{id}', [feedbackController::class, 'destroy']);
-
+Route::get('FeedbackByShippingCompanyId/{id}', [feedbackController::class, 'FeedbackByShippingCompanyId']);
 Route::get('feedback/avg-rate/{id}', [FeedbackController::class, 'getAverageRatingById']);

@@ -21,4 +21,8 @@ class shipping_companies extends Model
     {
         return $this->hasMany(posts::class);
     }
+    public function feedback()
+    {
+        return $this->hasMany(feedback::class);
+    }
 }

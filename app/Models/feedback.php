@@ -8,16 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class feedback extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'message',
-        'rate',
-        'shipping_company_id',
-        'client_id',
+        'message', 'rate', 'shipping_company_id', 'client_id',
     ];
 
-    public function shippingCompany()
+    public function shipping_companies()
     {
-        return $this->belongsTo(shipping_companies::class);
+        return $this->belongsTo(shipping_companies::class, 'shipping_company_id');
     }
 
     public function client()
