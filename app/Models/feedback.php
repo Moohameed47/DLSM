@@ -10,7 +10,7 @@ class feedback extends Model
     use HasFactory;
 
     protected $fillable = [
-        'message', 'rate', 'shipping_company_id', 'client_id',
+        'message', 'rate', 'shipping_company_id', 'client_id', 'feedback_type',
     ];
 
     public function shipping_companies()
@@ -21,5 +21,9 @@ class feedback extends Model
     public function client()
     {
         return $this->belongsTo(clients::class);
+    }
+    public function enumFeedbackType()
+    {
+        return ['client', 'shipping_company'];
     }
 }

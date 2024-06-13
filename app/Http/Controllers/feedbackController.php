@@ -14,13 +14,39 @@ class feedbackController extends Controller
         return response()->json($feedback);
     }
 
+    public function GetClient()
+    {
+        $client = Feedback::all()->where("feedback_type", "client");
+    }
+
+    public function GetShipping()
+    {
+        $client = Feedback::all()->where("feedback_type", "shipping_company");
+    }
+
     public function FeedbackByShippingCompanyId($id)
     {
-        $feedback = Feedback::where('shipping_company_id', $id)->get();
+        $feedback = Feedback::where('shipping_company_id', $id)
+            ->where('feedback_type', 'shipping_company')
+            ->get();
         $feedback->load('client');
         if ($feedback->isEmpty()) {
             return response()->json([
                 'message' => 'No feedback found for this shipping company.',
+            ], 404);
+        }
+        return response()->json($feedback);
+    }
+
+    public function FeedbackByClientId($id)
+    {
+        $feedback = Feedback::where('client_id', $id)
+            ->where('feedback_type', 'client')
+            ->get();
+        $feedback->load('shipping_companies');
+        if ($feedback->isEmpty()) {
+            return response()->json([
+                'message' => 'No feedback found for this client.',
             ], 404);
         }
         return response()->json($feedback);
@@ -38,6 +64,7 @@ class feedbackController extends Controller
             'rate' => 'required|numeric|between:0,5',
             'shipping_company_id' => 'required|exists:shipping_companies,id',
             'client_id' => 'required|exists:clients,id',
+            'feedback_type' => 'required'
         ]);
 
         $feedback = Feedback::create($validatedData);

@@ -31,4 +31,8 @@ class clients extends Model
             'id'
         );
     }
+    public function second_feedback()
+    {
+        return $this->hasMany(second_feedback::class);
+    }
 }

@@ -13,16 +13,24 @@ class shipping_companies extends Model
     protected $fillable = [
         'Name', 'Email', 'Password', 'Address', 'Website', 'BusinessHistory', 'BusinessHours', 'PhoneNumber'
     ];
+
     public function agents()
     {
         return $this->hasMany(agents::class);
     }
+
     public function posts()
     {
         return $this->hasMany(posts::class);
     }
+
     public function feedback()
     {
         return $this->hasMany(feedback::class);
+    }
+
+    public function second_feedback()
+    {
+        return $this->hasMany(second_feedback::class);
     }
 }
