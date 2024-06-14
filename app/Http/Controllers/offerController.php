@@ -25,7 +25,7 @@ class offerController extends Controller
         $offerIds = $requests->pluck('id');
         $offers = offers::whereIn('id', $offerIds)
             ->orderBy('price', 'desc')
-            ->with('request', 'agent' , 'agent.shipping_companies')
+            ->with('request', 'agent', 'agent.shipping_companies')
             ->get();
 
         return $offers;
@@ -63,7 +63,11 @@ class offerController extends Controller
 
     public function offersForSpecificRequest($id)
     {
-        return offers::all()->where('request_id', $id);
+        $offers = offers::all()->where('request_id', $id);
+        $offers->load('request');
+        $offers->load('agent');
+        $offers->load('agent.shipping_companies');
+        return $offers;
     }
 
     public function show($id)
