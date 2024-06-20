@@ -222,11 +222,12 @@ class offerController extends Controller
     public function sumOfferValuesByShippingId($id)
     {
         $offerSums = DB::table('offers')
-            ->select(DB::raw('agents.shipping_id, SUM(Price + PL + TT + FT + OF + THC + ExtraFees) as total_sum'))
+            ->select('agents.shipping_id', DB::raw('SUM(Price + PL + TT + FT + OF + THC + ExtraFees) as total_sum'))
             ->join('agents', 'offers.agents_id', '=', 'agents.id')
             ->where('agents.shipping_id', $id)
             ->groupBy('agents.shipping_id')
             ->get();
+
         return response()->json($offerSums);
     }
 }
