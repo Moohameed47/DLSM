@@ -227,7 +227,6 @@ class offerController extends Controller
             ->where('agents.shipping_id', $id)
             ->groupBy('agents.shipping_id')
             ->get();
-
-        return response()->json($offerSums);
+        return $offerSums;
     }
 }
