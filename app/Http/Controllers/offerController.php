@@ -6,7 +6,9 @@ use App\Models\agents;
 use App\Models\offers;
 use App\Models\requests;
 use App\Models\shipping_companies;
+use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class offerController extends Controller
 {
@@ -16,19 +18,33 @@ class offerController extends Controller
         $offers = offers::orderBy('price', 'desc')->get();
         $offers->load('request');
         $offers->load('agent');
+        $offers->load('agent.shipping_companies');
+        $offers->load('request.client');
         return $offers;
     }
 
-    public function indexNotAccept()
+    public function indexNotAccept2()
     {
         $requests = requests::whereNull('ACCEPT')->get();
         $offerIds = $requests->pluck('id');
         $offers = offers::whereIn('id', $offerIds)
             ->orderBy('price', 'desc')
-            ->with('request', 'agent', 'agent.shipping_companies')
+            ->with('request', 'agent', 'agent.shipping_companies', 'request.client')
             ->get();
 
         return $offers;
+    }
+
+    public function indexNotAccept()
+    {
+        $offer = offers::whereHas('request', function ($query) {
+            $query->whereNull('ACCEPT');
+        })->get();
+        $offer->load('request');
+        $offer->load('agent');
+        $offer->load('agent.shipping_companies');
+        $offer->load('request.client');
+        return $offer;
     }
 
     public function AcceptOffers($request_id, $offer_id)
@@ -106,6 +122,10 @@ class offerController extends Controller
                 "request_id" => $req->request_id,
                 "CustomsPrice" => $req->CustomsPrice,
                 "TruckingPrice" => $req->TruckingPrice,
+                "totalPrice" => (float) ($req->Price ?? 0) + (float) ($req->PL ?? 0) + (float) ($req->TT ?? 0) +
+                    (float) ($req->FT ?? 0) + (float) ($req->OF ?? 0) + (float) ($req->THC ?? 0) +
+                    (float) ($req->ExtraFees ?? 0) + (float) ($req->CustomsPrice ?? 0) +
+                    (float) ($req->TruckingPrice ?? 0),
             ]);
         } else if ($Requestaya->CustomsClearness == "1") {
             offers::create([
@@ -124,6 +144,10 @@ class offerController extends Controller
                 "request_id" => $req->request_id,
                 "CustomsPrice" => $req->CustomsPrice,
                 "TruckingPrice" => 0,
+                "totalPrice" => (float) ($req->Price ?? 0) + (float) ($req->PL ?? 0) + (float) ($req->TT ?? 0) +
+                    (float) ($req->FT ?? 0) + (float) ($req->OF ?? 0) + (float) ($req->THC ?? 0) +
+                    (float) ($req->ExtraFees ?? 0) + (float) ($req->CustomsPrice ?? 0) +
+                    (float) ($req->TruckingPrice ?? 0),
             ]);
         } else if ($Requestaya->Tracking == "1")
             offers::create([
@@ -142,6 +166,10 @@ class offerController extends Controller
                 "request_id" => $req->request_id,
                 "TruckingPrice" => $req->TruckingPrice,
                 "CustomsPrice" => 0,
+                "totalPrice" => (float) ($req->Price ?? 0) + (float) ($req->PL ?? 0) + (float) ($req->TT ?? 0) +
+                    (float) ($req->FT ?? 0) + (float) ($req->OF ?? 0) + (float) ($req->THC ?? 0) +
+                    (float) ($req->ExtraFees ?? 0) + (float) ($req->CustomsPrice ?? 0) +
+                    (float) ($req->TruckingPrice ?? 0),
             ]);
         else
             offers::create([
@@ -160,7 +188,12 @@ class offerController extends Controller
                 "request_id" => $req->request_id,
                 "CustomsPrice" => 0,
                 "TruckingPrice" => 0,
+                "totalPrice" => ((float) ($req->Price ?? 0)) + ((float) ($req->PL ?? 0)) + ((float) ($req->TT ?? 0)) +
+                    ((float) ($req->FT ?? 0)) + ((float) ($req->OF ?? 0)) + ((float) ($req->THC ?? 0)) +
+                    (float) ($req->ExtraFees ?? 0) + (float) ($req->CustomsPrice ?? 0) +
+                    ((float) ($req->TruckingPrice ?? 0)),
             ]);
+
         return response()->json([
             "status" => true,
             "message" => "Offer Sent Successfully",
@@ -175,5 +208,25 @@ class offerController extends Controller
             $agentName = $offer->agent ? $offer->agent->name : 'N/A';
             return $agentName;
         }
+    }
+    public function NumberOfOffers($id)
+    {
+        $offersCount = DB::table('offers')
+            ->select(DB::raw('agents.shipping_id, count(*) as offer_count'))
+            ->join('agents', 'offers.agents_id', '=', 'agents.id')
+            ->where('agents.shipping_id', $id)
+            ->groupBy('agents.shipping_id')
+            ->get();
+        return $offersCount;
+    }
+    public function sumOfferValuesByShippingId($id)
+    {
+        $offerSums = DB::table('offers')
+            ->select(DB::raw('agents.shipping_id, SUM(Price + PL + TT + FT + OF + THC + ExtraFees) as total_sum'))
+            ->join('agents', 'offers.agents_id', '=', 'agents.id')
+            ->where('agents.shipping_id', $id)
+            ->groupBy('agents.shipping_id')
+            ->get();
+        return response()->json($offerSums);
     }
 }

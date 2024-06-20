@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class requestController extends Controller
 {
-
-        public function index()
-        {
-            return requests::with('client')->whereHas('client')->get();
-        }
+    public function index()
+    {
+        return requests::with('client')->whereHas('client')->get();
+    }
 
     public function show($id)
     {
-        $offers = offers::all()->where('request.id',$id)->first();
-        $offers->load('agent');
+        $offers = offers::all()->where('request_id', $id)->first();
+        if ($offers == null) return requests::all()->where('id', $id)->first();
+        $offers->load('request');
         $offers->load('agent.shipping_companies');
         $offers->load('request.client');
         return $offers;
@@ -250,7 +250,7 @@ updateDone
                     "Country" => $req->Country,
                     "Location" => $req->Location,
                     "Destination" => $req->Destination,
-                    "Location2" =>0,
+                    "Location2" => 0,
                     "Destination2" => 0,
                     "GoodsType" => $req->GoodsType,
                     "Weight" => $req->Weight,
@@ -268,7 +268,7 @@ updateDone
                     "Country" => $req->Country,
                     "Location" => $req->Location,
                     "Destination" => $req->Destination,
-                    "Location2" =>0,
+                    "Location2" => 0,
                     "Destination2" => 0,
                     "Comment" => $req->Comment,
                     "GoodsType" => $req->GoodsType,

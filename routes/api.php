@@ -63,11 +63,14 @@ Route::get('offers/{id}', [offerController::class, 'show']);
 Route::post('offers-create', [offerController::class, 'store']);
 Route::get('offers', [offerController::class, 'index']);
 Route::get('offersNotAccept', [offerController::class, 'indexNotAccept']);
+Route::get('offersNotAccept2', [offerController::class, 'indexNotAccept2']);
 Route::get('offers/request/{id}', [offerController::class, 'offersForSpecificRequest']);
 Route::get('offers/agent/{id}', [offerController::class, 'offerForSpecificAgent']);
 Route::get('offer-accept/{request_id}/{offer_id}', [offerController::class, 'AcceptOffers']);
 Route::get('getAgentAndShippingData/{id}', [offerController::class, 'getAgentAndShippingData']);
 Route::get('Which-offer-accept', [offerController::class, 'WhichOfferAccept']);
+Route::get('NumberOfOffers/{id}', [offerController::class, 'NumberOfOffers']);
+Route::get('sumByShipping/{id}', [OfferController::class, 'sumOfferValuesByShippingId']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);

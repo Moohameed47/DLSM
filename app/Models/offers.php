@@ -10,7 +10,7 @@ class offers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'Comment', 'ExtraFees', 'PowerPerDay', 'request_id', 'From', 'To', 'CustomsPrice', 'TruckingPrice',
+        'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'ExtraFees', 'Comment', 'PowerPerDay', 'request_id', 'From', 'To', 'CustomsPrice', 'TruckingPrice',
     ];
 
     public function agent()
