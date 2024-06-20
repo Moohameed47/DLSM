@@ -71,6 +71,7 @@ Route::get('getAgentAndShippingData/{id}', [offerController::class, 'getAgentAnd
 Route::get('Which-offer-accept', [offerController::class, 'WhichOfferAccept']);
 Route::get('NumberOfOffers/{id}', [offerController::class, 'NumberOfOffers']);
 Route::get('sumByShipping/{id}', [OfferController::class, 'sumOfferValuesByShippingId']);
+Route::get('test', [OfferController::class, 'test']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);

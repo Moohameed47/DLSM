@@ -22,6 +22,17 @@ class offerController extends Controller
         $offers->load('request.client');
         return $offers;
     }
+    public function test()
+    {
+        $offers = offers::orderBy('price', 'desc')->get();
+        $offers->load('request');
+        $offers->load('agent');
+        $offers->load('agent.shipping_companies');
+        $offers->load('shipping_companies.feedback');
+        $offers->load('shipping_companies.posts');
+        $offers->load('request.client');
+        return $offers;
+    }
 
     public function indexNotAccept2()
     {
@@ -222,7 +233,7 @@ class offerController extends Controller
     public function sumOfferValuesByShippingId($id)
     {
         $offerSums = DB::table('offers')
-            ->select('agents.shipping_id', DB::raw('SUM(Price + PL + TT + FT + OF + THC + ExtraFees) as total_sum'))
+            ->select('agents.shipping_id', DB::raw('SUM(Price + PL + TT + FT + THC + ExtraFees) as total_sum'))
             ->join('agents', 'offers.agents_id', '=', 'agents.id')
             ->where('agents.shipping_id', $id)
             ->groupBy('agents.shipping_id')
