@@ -34,6 +34,6 @@ class clients extends Model
     }
     public function feedback()
     {
-        return $this->hasMany(Feedback::class, 'client_id');
+        return $this->hasMany(feedback::class, 'client_id');
     }
 }
