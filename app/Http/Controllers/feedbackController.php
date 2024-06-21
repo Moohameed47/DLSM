@@ -43,7 +43,7 @@ class feedbackController extends Controller
         $feedback = Feedback::where('client_id', $id)
             ->where('feedback_type', 'client')
             ->get();
-        $feedback->load('shipping_companies');
+        $feedback->load('shipping_company');
         if ($feedback->isEmpty()) {
             return response()->json([
                 'message' => 'No feedback found for this client.',
@@ -62,7 +62,7 @@ class feedbackController extends Controller
         $validatedData = $request->validate([
             'message' => 'required|string',
             'rate' => 'required|numeric|between:0,5',
-            'shipping_company_id' => 'required|exists:shipping_companies,id',
+            'shipping_company_id' => 'required|exists:shipping_company,id',
             'client_id' => 'required|exists:clients,id',
             'feedback_type' => 'required'
         ]);

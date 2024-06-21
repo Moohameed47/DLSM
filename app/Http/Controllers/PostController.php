@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        return posts::with('shipping_companies')->whereHas('shipping_companies')->orderBy('created_at', 'desc')
+        return posts::with('shipping_company')->whereHas('shipping_company')->orderBy('created_at', 'desc')
             ->get();
     }
 
@@ -49,7 +49,8 @@ class PostController extends Controller
         $post->update($validatedData);
 
         return response()->json(
-            ['message' => 'This posts Has Been Updated',
+            [
+                'message' => 'This posts Has Been Updated',
                 "status" => true,
             ]
         );
@@ -65,7 +66,8 @@ class PostController extends Controller
         $post->delete();
 
         return response()->json(
-            ['message' => 'This posts Has Been Deleted',
+            [
+                'message' => 'This posts Has Been Deleted',
                 "status" => true,
             ]
         );
@@ -81,7 +83,8 @@ class PostController extends Controller
         $post = posts::create($validatedData);
 
         return response()->json(
-            ['message' => 'This New posts Has Been Saved',
+            [
+                'message' => 'This New posts Has Been Saved',
                 "status" => true,
                 "posts" => $post
             ]

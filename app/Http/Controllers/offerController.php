@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\agents;
 use App\Models\offers;
 use App\Models\requests;
-use App\Models\shipping_companies;
+use App\Models\shipping_company;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +18,8 @@ class offerController extends Controller
         $offers = offers::orderBy('price', 'desc')->get();
         $offers->load('request');
         $offers->load('agent');
-        $offers->load('agent.shipping_companies');
-        $offers->load('agent.shipping_companies.posts');
+        $offers->load('agent.shipping_company');
+        $offers->load('agent.shipping_company.posts');
         $offers->load('request.client');
         return $offers;
     }
@@ -30,7 +30,7 @@ class offerController extends Controller
         $offerIds = $requests->pluck('id');
         $offers = offers::whereIn('id', $offerIds)
             ->orderBy('price', 'desc')
-            ->with('request', 'agent', 'agent.shipping_companies', 'request.client')
+            ->with('request', 'agent', 'agent.shipping_company', 'request.client')
             ->get();
 
         return $offers;
@@ -43,7 +43,7 @@ class offerController extends Controller
         })->get();
         $offer->load('request');
         $offer->load('agent');
-        $offer->load('agent.shipping_companies');
+        $offer->load('agent.shipping_company');
         $offer->load('request.client');
         return $offer;
     }
@@ -83,7 +83,7 @@ class offerController extends Controller
         $offers = offers::all()->where('request_id', $id);
         $offers->load('request');
         $offers->load('agent');
-        $offers->load('agent.shipping_companies');
+        $offers->load('agent.shipping_company');
         return $offers;
     }
 
@@ -92,7 +92,7 @@ class offerController extends Controller
         $offers = offers::all()->where('id', $id)->first();
         $offers->load('request');
         $offers->load('agent');
-        $offers->load('agent.shipping_companies');
+        $offers->load('agent.shipping_company');
         return $offers;
     }
 

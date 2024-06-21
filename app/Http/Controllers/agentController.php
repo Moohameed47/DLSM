@@ -9,7 +9,7 @@ class agentController extends Controller
 {
     public function index()
     {
-        return agents::with('shipping_companies')->whereHas('shipping_companies')->get();
+        return agents::with('shipping_company')->whereHas('shipping_company')->get();
 
         return agents::all();
     }
@@ -33,9 +33,9 @@ class agentController extends Controller
     {
         request()->validate([
             "Name" => "required",
-            "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_companies",
+            "Email" => "required|email|unique:agents|unique:admins|unique:clients|unique:shipping_company",
             "Password" => "required|confirmed",
-            "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_companies",
+            "PhoneNumber" => "required|unique:agents|unique:clients|unique:shipping_company",
             "shipping_id" => "required"
         ]);
         $newAgent = request()->all();

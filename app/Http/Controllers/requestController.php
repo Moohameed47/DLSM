@@ -18,7 +18,7 @@ class requestController extends Controller
         $offers = offers::all()->where('request_id', $id)->first();
         if ($offers == null) return requests::all()->where('id', $id)->first();
         $offers->load('request');
-        $offers->load('agent.shipping_companies');
+        $offers->load('agent.shipping_company');
         $offers->load('request.client');
         return $offers;
     }
