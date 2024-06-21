@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use app\Models\agents;
+use app\Models\clients;
+use app\Models\feedback;
+use app\Models\requests;
 class reportController extends Controller
 {
     public function getShippingCompanyDetails($id)
@@ -45,23 +48,23 @@ class reportController extends Controller
     }
 
     public function getClientDetails($id){
-    $client = Client::with(['requests', 'feedback'])->find($id);
+    $client = clients::with(['requests', 'feedback'])->find($id);
 
     if (!$client) {
-        return response()->json(['error' => 'Client not found'], 404);
+        return response()->json(['error' => 'Clients not found'], 404);
     }
 
-    $numberOfRequests = $client->requests->count();
-    $feedbackRate = $client->feedback->avg('rate');
-    $acceptedRequestsCount = $client->requests->whereNotNull('ACCEPT')->count();
+    $numberOfRequests = $clients->requests->count();
+    $feedbackRate = $clients->feedback->avg('rate');
+    $acceptedRequestsCount = $clients->requests->whereNotNull('ACCEPT')->count();
 
     $result = [
-        'Name' => $client->Name,
-        'Email' => $client->Email,
-        'SSN' => $client->SSN,
-        'PhoneNumber' => $client->PhoneNumber,
-        'Nationality' => $client->Nationality,
-        'Address' => $client->Address,
+        'Name' => $clients->Name,
+        'Email' => $clients->Email,
+        'SSN' => $clients->SSN,
+        'PhoneNumber' => $clients->PhoneNumber,
+        'Nationality' => $clients->Nationality,
+        'Address' => $clients->Address,
         'NumberOfRequests' => $numberOfRequests,
         'FeedbackRate' => $feedbackRate,
         'AcceptedRequestsCount' => $acceptedRequestsCount,
