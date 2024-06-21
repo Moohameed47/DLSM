@@ -76,6 +76,7 @@ Route::get('sumByShipping/{id}', [OfferController::class, 'sumOfferValuesByShipp
 
 //Report 
 Route::get('getShippingCompanyDetails/{id}', [reportController::class, 'getShippingCompanyDetails']);
+Route::get('getClientDetails/{id}', [reportController::class, 'getClientDetails']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);
