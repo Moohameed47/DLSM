@@ -13,6 +13,8 @@ class feedback extends Model
         'message', 'rate', 'shipping_company_id', 'client_id', 'feedback_type',
     ];
 
+    protected $table = 'feedback';
+
     public function shipping_companies()
     {
         return $this->belongsTo(shipping_companies::class, 'shipping_company_id');

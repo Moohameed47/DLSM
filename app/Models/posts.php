@@ -11,6 +11,8 @@ class posts extends Model
     protected $fillable = [
         'id', 'data', 'shipping_companies_id'
     ];
+    protected $table = 'posts';
+
     public function shipping_companies()
     {
         return $this->belongsTo(shipping_companies::class, 'shipping_company_id');

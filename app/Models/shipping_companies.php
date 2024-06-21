@@ -14,18 +14,20 @@ class shipping_companies extends Model
         'Name', 'Email', 'Password', 'Address', 'Website', 'BusinessHistory', 'BusinessHours', 'PhoneNumber'
     ];
 
+    protected $table = 'shipping_companies';
+
     public function agents()
     {
-        return $this->hasMany(agents::class);
+        return $this->hasMany(agents::class, 'shipping_id');
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(feedback::class, 'shipping_company_id');
     }
 
     public function posts()
     {
-        return $this->hasMany(posts::class);
-    }
-
-    public function feedbacks()
-    {
-        return $this->hasMany(feedback::class);
+        return $this->hasMany(posts::class, 'shipping_companies_id');
     }
 }

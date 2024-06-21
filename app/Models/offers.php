@@ -13,11 +13,12 @@ class offers extends Model
         'agents_id', 'Price', 'PL', 'TT', 'FT', 'OF', 'THC', 'ExtraFees', 'Comment', 'PowerPerDay', 'request_id', 'From', 'To', 'CustomsPrice', 'TruckingPrice',
     ];
 
+    protected $table = 'offers';
+
     public function agent()
     {
-        return $this->belongsTo(agents::class, "agents_id");
+        return $this->belongsTo(agents::class, 'agents_id');
     }
-
     public function request()
     {
         return $this->belongsTo(requests::class, 'request_id');

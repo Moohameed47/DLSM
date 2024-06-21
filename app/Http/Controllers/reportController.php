@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,18 +10,37 @@ class reportController extends Controller
 {
     public function getShippingCompanyDetails($id)
     {
-        $shippingCompany = DB::table('shipping_companies')
-            ->select('shipping_companies.id', 'shipping_companies.Name', 'shipping_companies.Email', 'shipping_companies.Website', 'shipping_companies.Address', 'shipping_companies.PhoneNumber')
-            ->selectRaw('(SELECT COUNT(*) FROM agents WHERE agents.shipping_id = shipping_companies.id) AS number_of_agents')
-            ->selectRaw('(SELECT COUNT(*) FROM offers o WHERE o.agents_id IN (SELECT id FROM agents WHERE agents.shipping_id = shipping_companies.id)) AS number_of_offers')
-            ->selectRaw('(SELECT COUNT(*) FROM feedback WHERE feedback.shipping_company_id = shipping_companies.id) AS number_of_feedback')
-            ->where('shipping_companies.id', $id)
-            ->first();
+        $shippingCompanies = shipping_companies::with('agents.offers', 'feedback', 'posts')->get();
 
-        if (!$shippingCompany) {
-            return response()->json(['message' => 'Shipping company not found'], 404);
-        }
+        $result = $shippingCompanies->map(function ($company) {
+            $numberOfAgents = $company->agents->count();
+            $numberOfOffers = $company->agents->sum(function ($agent) {
+                return $agent->offers->count();
+            });
+            $totalPrices = $company->agents->sum(function ($agent) {
+                return $agent->offers->sum(function ($offer) {
+                    return $offer->Price + $offer->PL + $offer->TT + $offer->FT + $offer->OF + $offer->THC + $offer->ExtraFees;
+                });
+            });
+            $numberOfFeedbacks = $company->feedback->count();
+            $numberOfPosts = $company->posts->count();
+            $totalRate = $company->feedback->avg('rate');
 
-        return response()->json($shippingCompany);
+            return [
+                'Name' => $company->Name,
+                'Email' => $company->Email,
+                'Website' => $company->Website,
+                'NumberOfAgents' => $numberOfAgents,
+                'NumberOfOffers' => $numberOfOffers,
+                'TotalPrices' => $totalPrices,
+                'Address' => $company->Address,
+                'PhoneNumber' => $company->PhoneNumber,
+                'NumberOfFeedbacks' => $numberOfFeedbacks,
+                'NumberOfPosts' => $numberOfPosts,
+                'TotalRate' => $totalRate,
+            ];
+        });
+
+        return response()->json($result);
     }
 }

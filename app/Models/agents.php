@@ -13,12 +13,15 @@ class agents extends Model
         'shipping_id', 'Name', 'Email', 'Password', 'PhoneNumber'
     ];
 
-    public function shipping_companies()
-    {
-        return $this->belongsTo(shipping_companies::class, 'shipping_id');
-    }
+    protected $table = 'agents';
+
     public function offers()
     {
-        return $this->hasMany(offers::class);
+        return $this->hasMany(offers::class, 'agents_id');
+    }
+
+    public function shippingCompany()
+    {
+        return $this->belongsTo(shipping_companies::class, 'shipping_id');
     }
 }
