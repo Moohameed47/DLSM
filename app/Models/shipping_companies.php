@@ -30,4 +30,9 @@ class shipping_companies extends Model
     {
         return $this->hasMany(posts::class, 'shipping_companies_id');
     }
+
+    public function offers()
+    {
+        return $this->hasManyThrough(offers::class, agents::class, 'shipping_id', 'agents_id', 'id', 'id');
+    }
 }
