@@ -20,7 +20,7 @@ class agents extends Model
         return $this->hasMany(offers::class, 'agents_id');
     }
 
-    public function shippingCompany()
+    public function shipping_company()
     {
         return $this->belongsTo(shipping_companies::class, 'shipping_id');
     }
