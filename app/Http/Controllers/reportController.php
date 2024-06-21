@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\shipping_companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use app\Models\agents;
-use app\Models\clients;
-use app\Models\feedback;
-use app\Models\requests;
+use App\Models\agents;
+use App\Models\clients;
+use App\Models\feedback;
+use App\Models\requests;
+
 class reportController extends Controller
 {
     public function getShippingCompanyDetails($id)
@@ -47,30 +48,30 @@ class reportController extends Controller
         return response()->json($result);
     }
 
-    public function getClientDetails($id){
-    $client = clients::with(['requests', 'feedback'])->find($id);
+    public function getClientDetails($id)
+    {
+        $client = clients::with(['requests', 'feedback'])->find($id);
 
-    if (!$client) {
-        return response()->json(['error' => 'Clients not found'], 404);
+        if (!$client) {
+            return response()->json(['error' => 'Clients not found'], 404);
+        }
+
+        $numberOfRequests = $clients->requests->count();
+        $feedbackRate = $clients->feedback->avg('rate');
+        $acceptedRequestsCount = $clients->requests->whereNotNull('ACCEPT')->count();
+
+        $result = [
+            'Name' => $clients->Name,
+            'Email' => $clients->Email,
+            'SSN' => $clients->SSN,
+            'PhoneNumber' => $clients->PhoneNumber,
+            'Nationality' => $clients->Nationality,
+            'Address' => $clients->Address,
+            'NumberOfRequests' => $numberOfRequests,
+            'FeedbackRate' => $feedbackRate,
+            'AcceptedRequestsCount' => $acceptedRequestsCount,
+        ];
+
+        return response()->json($result);
     }
-
-    $numberOfRequests = $clients->requests->count();
-    $feedbackRate = $clients->feedback->avg('rate');
-    $acceptedRequestsCount = $clients->requests->whereNotNull('ACCEPT')->count();
-
-    $result = [
-        'Name' => $clients->Name,
-        'Email' => $clients->Email,
-        'SSN' => $clients->SSN,
-        'PhoneNumber' => $clients->PhoneNumber,
-        'Nationality' => $clients->Nationality,
-        'Address' => $clients->Address,
-        'NumberOfRequests' => $numberOfRequests,
-        'FeedbackRate' => $feedbackRate,
-        'AcceptedRequestsCount' => $acceptedRequestsCount,
-    ];
-
-    return response()->json($result);
-}
-
 }
