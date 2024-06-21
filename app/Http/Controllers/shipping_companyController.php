@@ -25,12 +25,12 @@ class shipping_companyController extends Controller
         return response()->json($companies, 200);
     }
 
-    public function shippingForSpecificAgent($shipping_id){
-        return shipping_companies::all()->where('id',$shipping_id);
+    public function shippingForSpecificAgent($shipping_id)
+    {
+        return shipping_companies::all()->where('id', $shipping_id);
     }
     public function feedback()
     {
         return $this->hasMany(feedback::class);
     }
-
 }

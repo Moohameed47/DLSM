@@ -20,7 +20,7 @@ class requests extends Model
 
     public function client()
     {
-        return $this->belongsTo(clients::class ,  'client_id');
+        return $this->belongsTo(clients::class, 'client_id');
     }
     public function offers()
     {

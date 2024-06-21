@@ -18,10 +18,11 @@ class clients extends Model
         'CountryDealing', 'CountryTarget', 'TypeOfClient'
     ];
 
-    public function request()
+    public function requests()
     {
-        return $this->hasMany(requests::class);
+        return $this->hasMany(requests::class, 'client_id');
     }
+
     public function posts()
     {
         return $this->hasManyThrough(
@@ -31,8 +32,8 @@ class clients extends Model
             'id'
         );
     }
-    public function second_feedback()
+    public function feedback()
     {
-        return $this->hasMany(second_feedback::class);
+        return $this->hasMany(Feedback::class, 'client_id');
     }
 }
