@@ -14,6 +14,7 @@ use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\second_feedbackController;
 use App\Http\Controllers\shipping_companyController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\reportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -71,7 +72,10 @@ Route::get('getAgentAndShippingData/{id}', [offerController::class, 'getAgentAnd
 Route::get('Which-offer-accept', [offerController::class, 'WhichOfferAccept']);
 Route::get('NumberOfOffers/{id}', [offerController::class, 'NumberOfOffers']);
 Route::get('sumByShipping/{id}', [OfferController::class, 'sumOfferValuesByShippingId']);
-Route::get('test', [OfferController::class, 'test']);
+
+
+//Report 
+Route::get('getShippingCompanyDetails/{id}', [reportController::class, 'getShippingCompanyDetails']);
 
 //Requests
 Route::get('requests/{id}', [requestController::class, 'show']);

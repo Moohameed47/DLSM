@@ -9,10 +9,10 @@ class posts extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','data','shipping_companies_id'
+        'id', 'data', 'shipping_companies_id'
     ];
     public function shipping_companies()
     {
-        return $this->belongsTo(shipping_companies::class, 'shipping_companies_id');
+        return $this->belongsTo(shipping_companies::class, 'shipping_company_id');
     }
 }

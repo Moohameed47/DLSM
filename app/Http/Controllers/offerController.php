@@ -19,17 +19,7 @@ class offerController extends Controller
         $offers->load('request');
         $offers->load('agent');
         $offers->load('agent.shipping_companies');
-        $offers->load('request.client');
-        return $offers;
-    }
-    public function test()
-    {
-        $offers = offers::orderBy('price', 'desc')->get();
-        $offers->load('request');
-        $offers->load('agent');
-        $offers->load('agent.shipping_companies');
-        $offers->load('shipping_companies.feedback');
-        $offers->load('shipping_companies.posts');
+        $offers->load('agent.shipping_companies.posts');
         $offers->load('request.client');
         return $offers;
     }
