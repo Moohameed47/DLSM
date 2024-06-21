@@ -43,4 +43,31 @@ class reportController extends Controller
 
         return response()->json($result);
     }
+
+    public function getClientDetails($id){
+    $client = Client::with(['requests', 'feedback'])->find($id);
+
+    if (!$client) {
+        return response()->json(['error' => 'Client not found'], 404);
+    }
+
+    $numberOfRequests = $client->requests->count();
+    $feedbackRate = $client->feedback->avg('rate');
+    $acceptedRequestsCount = $client->requests->whereNotNull('ACCEPT')->count();
+
+    $result = [
+        'Name' => $client->Name,
+        'Email' => $client->Email,
+        'SSN' => $client->SSN,
+        'PhoneNumber' => $client->PhoneNumber,
+        'Nationality' => $client->Nationality,
+        'Address' => $client->Address,
+        'NumberOfRequests' => $numberOfRequests,
+        'FeedbackRate' => $feedbackRate,
+        'AcceptedRequestsCount' => $acceptedRequestsCount,
+    ];
+
+    return response()->json($result);
+}
+
 }
