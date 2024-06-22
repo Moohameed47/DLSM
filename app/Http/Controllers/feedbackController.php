@@ -62,7 +62,7 @@ class feedbackController extends Controller
         $validatedData = $request->validate([
             'message' => 'required|string',
             'rate' => 'required|numeric|between:0,5',
-            'shipping_company_id' => 'required|exists:shipping_company,id',
+            'shipping_company_id' => 'required|exists:shipping_companies,id',
             'client_id' => 'required|exists:clients,id',
             'feedback_type' => 'required'
         ]);
