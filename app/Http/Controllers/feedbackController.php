@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
+use App\Models\feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,23 +10,23 @@ class feedbackController extends Controller
 {
     public function index()
     {
-        $feedback = Feedback::all();
+        $feedback = feedback::all();
         return response()->json($feedback);
     }
 
     public function GetClient()
     {
-        $client = Feedback::all()->where("feedback_type", "client");
+        $client = feedback::all()->where("feedback_type", "client");
     }
 
     public function GetShipping()
     {
-        $client = Feedback::all()->where("feedback_type", "shipping_company");
+        $client = feedback::all()->where("feedback_type", "shipping_companies");
     }
 
-    public function FeedbackByShippingCompanyId($id)
+    public function feedbackByShippingCompanyId($id)
     {
-        $feedback = Feedback::where('shipping_company_id', $id)
+        $feedback = feedback::where('shipping_company_id', $id)
             ->where('feedback_type', 'shipping_company')
             ->get();
         $feedback->load('client');
@@ -38,12 +38,12 @@ class feedbackController extends Controller
         return response()->json($feedback);
     }
 
-    public function FeedbackByClientId($id)
+    public function feedbackByClientId($id)
     {
-        $feedback = Feedback::where('client_id', $id)
+        $feedback = feedback::where('client_id', $id)
             ->where('feedback_type', 'client')
             ->get();
-        $feedback->load('shipping_company');
+        $feedback->load('shipping_companies');
         if ($feedback->isEmpty()) {
             return response()->json([
                 'message' => 'No feedback found for this client.',
@@ -54,7 +54,7 @@ class feedbackController extends Controller
 
     public function show($id)
     {
-        return Feedback::all()->where('id', $id);
+        return feedback::all()->where('id', $id);
     }
 
     public function store(Request $request)
@@ -67,12 +67,12 @@ class feedbackController extends Controller
             'feedback_type' => 'required'
         ]);
 
-        $feedback = Feedback::create($validatedData);
+        $feedback = feedback::create($validatedData);
 
         return response()->json($feedback, 201); // Created status code
     }
 
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request, feedback $feedback)
     {
         $validatedData = $request->validate([
             'message' => 'string|nullable',
@@ -84,7 +84,7 @@ class feedbackController extends Controller
         return response()->json($feedback);
     }
 
-    public function destroy(Feedback $feedback)
+    public function destroy(feedback $feedback)
     {
         $feedback->delete();
 
@@ -93,7 +93,7 @@ class feedbackController extends Controller
 
     public function getAverageRatingById($id)
     {
-        $averageRatings = Feedback::select('shipping_company_id', DB::raw('AVG(rate) as average_rate'))
+        $averageRatings = feedback::select('shipping_company_id', DB::raw('AVG(rate) as average_rate'))
             ->groupBy('shipping_company_id')
             ->where('shipping_company_id', $id)
             ->get();
