@@ -15,6 +15,6 @@ class posts extends Model
 
     public function shipping_companies()
     {
-        return $this->belongsTo(shipping_companies::class, 'shipping_company_id');
+        return $this->belongsTo(shipping_companies::class, 'shipping_companies_id');
     }
 }

@@ -20,7 +20,7 @@ class requestController extends Controller
         $offers->load('request');
         $offers->load('agent.shipping_company');
         $offers->load('request.client');
-        return $offers;
+        return response()->json($offers);
     }
 
     public function updateBooking($id) // Booking
